@@ -1,4 +1,4 @@
-# ResumeAI Pro
+# Hireready
 
 AI-powered resume builder tailored to fresher / intermediate / professional candidates.
 
