@@ -1,15 +1,28 @@
 import "./globals.css";
 import type { Metadata } from "next";
+import { Fraunces, Instrument_Sans } from "next/font/google";
 import { Toaster } from "sonner";
 
+const display = Fraunces({
+  subsets: ["latin"],
+  variable: "--font-display",
+  display: "swap",
+  axes: ["opsz", "SOFT"],
+});
+const sans = Instrument_Sans({
+  subsets: ["latin"],
+  variable: "--font-sans",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
-  title: "ResumeAI Pro — Build a Resume That Gets You Hired",
+  title: "ResumeAI Pro: Build a Resume That Gets You Hired",
   description:
     "AI-powered resume builder tailored to fresher, intermediate, or professional candidates. ATS-optimized, PDF export, instant cover letters.",
   metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000"),
   openGraph: {
     title: "ResumeAI Pro",
-    description: "AI-powered resume builder. ATS-optimized. Land interviews 3x faster.",
+    description: "AI-powered resume builder. ATS-friendly resumes tailored to your career stage.",
     type: "website",
   },
   twitter: {
@@ -21,10 +34,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${display.variable} ${sans.variable}`}>
       <body>
         {children}
-        <Toaster position="top-right" theme="dark" richColors closeButton />
+        <Toaster position="top-right" theme="light" richColors closeButton />
       </body>
     </html>
   );
