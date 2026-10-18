@@ -43,7 +43,7 @@ export default async function DashboardPage() {
               {profile?.user_type}
             </span>
           </h1>
-          <p className="mt-1 text-slate-600">Let's build something that gets you hired.</p>
+          <p className="mt-1 text-ink-600">Let's build something that gets you hired.</p>
         </div>
         <NewResumeButton userType={profile?.user_type ?? "fresher"} />
       </div>
@@ -54,7 +54,7 @@ export default async function DashboardPage() {
           <div>
             <div className="text-xs uppercase tracking-widest text-brand">{lastDraft ? "Continue where you left off" : "Most recent"}</div>
             <div className="mt-1 font-display text-lg font-semibold">{continueResume.title}</div>
-            <div className="text-sm text-slate-500">{continueResume.target_role || "No target role yet"}</div>
+            <div className="text-sm text-ink-500">{continueResume.target_role || "No target role yet"}</div>
           </div>
           <Link
             href={lastDraft ? `/builder/${continueResume.id}` : `/preview/${continueResume.id}`}
@@ -78,7 +78,7 @@ export default async function DashboardPage() {
           <div className="flex items-center justify-between gap-4">
             <div>
               <div className="font-semibold">You're on the Free plan</div>
-              <div className="text-slate-600">Upgrade for unlimited resumes, all templates, and priority AI.</div>
+              <div className="text-ink-600">Upgrade for unlimited resumes, all templates, and priority AI.</div>
             </div>
             <Link href="/pricing" className="btn-primary shrink-0">See plans</Link>
           </div>
@@ -93,7 +93,7 @@ export default async function DashboardPage() {
 function Stat({ label, value, capitalize }: { label: string; value: string | number; capitalize?: boolean }) {
   return (
     <div className="card">
-      <div className="text-xs uppercase tracking-wider text-slate-500">{label}</div>
+      <div className="text-xs uppercase tracking-wider text-ink-500">{label}</div>
       <div className={`mt-2 font-display text-2xl font-bold ${capitalize ? "capitalize" : ""}`}>{value}</div>
     </div>
   );

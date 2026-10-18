@@ -41,12 +41,12 @@ export default function ResetPasswordPage() {
         <form onSubmit={onSubmit} className="mt-6 space-y-4">
           <div>
             <label className="mb-1 block text-xs font-medium uppercase tracking-wider text-white/70">New password</label>
-            <input type="password" className="input text-slate-900" required value={password} onChange={(e) => setPassword(e.target.value)} />
+            <input type="password" className="input text-ink" required value={password} onChange={(e) => setPassword(e.target.value)} />
             <PasswordStrength password={password} />
           </div>
           <div>
             <label className="mb-1 block text-xs font-medium uppercase tracking-wider text-white/70">Confirm</label>
-            <input type="password" className="input text-slate-900" required value={confirm} onChange={(e) => setConfirm(e.target.value)} />
+            <input type="password" className="input text-ink" required value={confirm} onChange={(e) => setConfirm(e.target.value)} />
           </div>
           <button className="btn-primary w-full" type="submit" disabled={loading}>
             {loading ? "Updating..." : "Update password"}

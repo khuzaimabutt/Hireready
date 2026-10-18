@@ -72,13 +72,13 @@ export default function PricingPlans({ currentPlan = "free" as Plan }: { current
 
   return (
     <div className="space-y-6">
-      <div className="mx-auto flex w-fit items-center gap-1 rounded-full border border-slate-200 bg-white p-1">
+      <div className="mx-auto flex w-fit items-center gap-1 rounded-full border border-line bg-white p-1">
         {(["monthly", "annual"] as Billing[]).map((b) => (
           <button
             key={b}
             onClick={() => setBilling(b)}
             className={`rounded-full px-4 py-1.5 text-xs font-medium capitalize transition ${
-              billing === b ? "bg-brand text-white" : "text-slate-600 hover:text-slate-900"
+              billing === b ? "bg-brand text-white" : "text-ink-600 hover:text-ink"
             }`}
           >
             {b}
@@ -98,7 +98,7 @@ export default function PricingPlans({ currentPlan = "free" as Plan }: { current
               className={`relative rounded-2xl border bg-white p-6 transition ${
                 p.highlight
                   ? "border-brand shadow-2xl shadow-brand/10 md:scale-105 md:py-8"
-                  : "border-slate-200"
+                  : "border-line"
               }`}
             >
               {p.badge && (
@@ -112,9 +112,9 @@ export default function PricingPlans({ currentPlan = "free" as Plan }: { current
               <div className="font-display text-lg font-semibold">{p.name}</div>
               <div className="mt-2 flex items-baseline gap-1">
                 <span className="text-3xl font-bold">{price}</span>
-                {sub && <span className="text-sm text-slate-500">{sub}</span>}
+                {sub && <span className="text-sm text-ink-500">{sub}</span>}
               </div>
-              <ul className="mt-5 space-y-2 text-sm text-slate-700">
+              <ul className="mt-5 space-y-2 text-sm text-ink-700">
                 {p.features.map((f) => <li key={f} className="flex gap-2"><span className="text-green-500">✓</span> {f}</li>)}
               </ul>
               <button
@@ -130,12 +130,12 @@ export default function PricingPlans({ currentPlan = "free" as Plan }: { current
       </div>
 
       {/* Comparison strip */}
-      <div className="overflow-x-auto rounded-xl border border-slate-200 bg-white">
+      <div className="overflow-x-auto rounded-xl border border-line bg-white">
         <table className="w-full text-sm">
           <thead>
-            <tr className="border-b border-slate-200 bg-slate-50">
-              <th className="px-4 py-3 text-left font-semibold text-slate-600">Feature</th>
-              {PLANS.map((p) => <th key={p.key} className="px-4 py-3 text-center font-semibold text-slate-600">{p.name}</th>)}
+            <tr className="border-b border-line bg-paper-50">
+              <th className="px-4 py-3 text-left font-semibold text-ink-600">Feature</th>
+              {PLANS.map((p) => <th key={p.key} className="px-4 py-3 text-center font-semibold text-ink-600">{p.name}</th>)}
             </tr>
           </thead>
           <tbody>
@@ -150,11 +150,11 @@ export default function PricingPlans({ currentPlan = "free" as Plan }: { current
               { label: "Cover letters", values: ["—", "✓", "✓", "✓"] },
               { label: "Version history", values: ["—", "—", "✓", "—"] },
             ].map((row, i) => (
-              <tr key={i} className="border-b border-slate-100 last:border-b-0">
-                <td className="px-4 py-3 text-slate-700">{row.label}</td>
+              <tr key={i} className="border-b border-line last:border-b-0">
+                <td className="px-4 py-3 text-ink-700">{row.label}</td>
                 {row.values.map((v, j) => (
-                  <td key={j} className="px-4 py-3 text-center text-slate-600">
-                    {v === "✓" ? <span className="text-green-500 font-bold">✓</span> : v === "—" ? <span className="text-slate-300">—</span> : v}
+                  <td key={j} className="px-4 py-3 text-center text-ink-600">
+                    {v === "✓" ? <span className="text-green-500 font-bold">✓</span> : v === "—" ? <span className="text-ink-300">—</span> : v}
                   </td>
                 ))}
               </tr>
@@ -163,7 +163,7 @@ export default function PricingPlans({ currentPlan = "free" as Plan }: { current
         </table>
       </div>
 
-      <p className="text-center text-xs text-slate-500">All plans include 7-day refund · Secure cloud storage · Cancel anytime</p>
+      <p className="text-center text-xs text-ink-500">All plans include 7-day refund · Secure cloud storage · Cancel anytime</p>
     </div>
   );
 }

@@ -15,7 +15,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
     .single();
 
   return (
-    <div className="min-h-screen bg-soft text-slate-900">
+    <div className="min-h-screen bg-soft text-ink">
       <AppNav profile={profile} email={user.email ?? ""} />
       <main className="mx-auto max-w-6xl px-6 py-8">{children}</main>
     </div>

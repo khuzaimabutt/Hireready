@@ -47,7 +47,7 @@ export default function AtsScoreRing({ score, size = 120 }: { score: number; siz
       </svg>
       <div className="absolute inset-0 flex flex-col items-center justify-center">
         <div className={`font-display text-3xl font-bold leading-none ${tone}`}>{progress}</div>
-        <div className="text-[10px] uppercase tracking-widest text-slate-500">/ 100</div>
+        <div className="text-[10px] uppercase tracking-widest text-ink-500">/ 100</div>
       </div>
     </div>
   );

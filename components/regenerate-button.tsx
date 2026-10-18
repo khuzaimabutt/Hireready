@@ -25,7 +25,7 @@ export default function RegenerateButton({ id }: { id: string }) {
       >
         {loading ? "Regenerating..." : "↻ Regenerate with new AI pass"}
       </button>
-      <p className="mt-2 text-[11px] text-slate-500">Uses 1 credit. Your edits stay; only the AI rewrites get refreshed.</p>
+      <p className="mt-2 text-[11px] text-ink-500">Uses 1 credit. Your edits stay; only the AI rewrites get refreshed.</p>
     </div>
   );
 }

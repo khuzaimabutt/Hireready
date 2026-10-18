@@ -34,13 +34,13 @@ function Group({ title, tips, icon, textColor, bg, border }: {
   return (
     <div>
       <div className={`mb-2 text-[11px] font-semibold uppercase tracking-wider ${textColor}`}>
-        {icon} {title} <span className="text-slate-400">({tips.length})</span>
+        {icon} {title} <span className="text-ink-500">({tips.length})</span>
       </div>
       <ul className="space-y-2">
         {tips.map((t, i) => (
           <li key={i} className={`rounded-lg border ${border} ${bg} px-3 py-2 text-sm`}>
             <div className={`font-medium ${textColor}`}>{t.text}</div>
-            {t.fix && <div className="mt-1 text-xs text-slate-700">→ {t.fix}</div>}
+            {t.fix && <div className="mt-1 text-xs text-ink-700">→ {t.fix}</div>}
           </li>
         ))}
       </ul>

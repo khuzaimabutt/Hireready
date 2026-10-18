@@ -47,7 +47,7 @@ export default function DashboardResumes({
     <section>
       <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
         <h2 className="font-display text-xl font-semibold">My Resumes</h2>
-        <div className="text-xs text-slate-500">{filtered.length} of {resumes.length}</div>
+        <div className="text-xs text-ink-500">{filtered.length} of {resumes.length}</div>
       </div>
 
       {resumes.length > 0 && (
@@ -59,7 +59,7 @@ export default function DashboardResumes({
               value={q}
               onChange={(e) => setQ(e.target.value)}
             />
-            <svg className="absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400" width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M9 3.5a5.5 5.5 0 1 0 3.359 9.842l3.4 3.4a.75.75 0 1 0 1.06-1.06l-3.4-3.4A5.5 5.5 0 0 0 9 3.5ZM5.5 9a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0Z" clipRule="evenodd"/></svg>
+            <svg className="absolute left-2.5 top-1/2 -translate-y-1/2 text-ink-500" width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M9 3.5a5.5 5.5 0 1 0 3.359 9.842l3.4 3.4a.75.75 0 1 0 1.06-1.06l-3.4-3.4A5.5 5.5 0 0 0 9 3.5ZM5.5 9a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0Z" clipRule="evenodd"/></svg>
           </div>
           <FilterChip active={filter === "all"} onClick={() => setFilter("all")}>All</FilterChip>
           <FilterChip active={filter === "draft"} onClick={() => setFilter("draft")}>Drafts</FilterChip>
@@ -76,11 +76,11 @@ export default function DashboardResumes({
         <div className="card flex flex-col items-center py-16 text-center">
           <div className="mb-4 text-5xl">📄</div>
           <h3 className="font-display text-xl font-semibold">No resumes yet</h3>
-          <p className="mt-1 text-sm text-slate-500">Create your first resume to get started.</p>
+          <p className="mt-1 text-sm text-ink-500">Create your first resume to get started.</p>
           <NewResumeButton userType={userType} className="mt-6" />
         </div>
       ) : filtered.length === 0 ? (
-        <div className="card py-12 text-center text-sm text-slate-500">No matches. Try clearing search or filters.</div>
+        <div className="card py-12 text-center text-sm text-ink-500">No matches. Try clearing search or filters.</div>
       ) : (
         <div className="grid gap-4 md:grid-cols-3">
           {filtered.map((r) => (
@@ -97,7 +97,7 @@ function FilterChip({ active, onClick, children }: { active: boolean; onClick: (
     <button
       onClick={onClick}
       className={`rounded-full px-3 py-1.5 text-xs font-medium transition ${
-        active ? "bg-brand text-white" : "border border-slate-200 bg-white text-slate-600 hover:bg-slate-50"
+        active ? "bg-brand text-white" : "border border-line bg-white text-ink-600 hover:bg-paper-100"
       }`}
     >
       {children}

@@ -43,7 +43,7 @@ export default function ForgotPasswordPage() {
           <form onSubmit={onSubmit} className="mt-6 space-y-4">
             <div>
               <label className="mb-1 block text-xs font-medium uppercase tracking-wider text-white/70">Email</label>
-              <input type="email" className="input text-slate-900" required value={email} onChange={(e) => setEmail(e.target.value)} />
+              <input type="email" className="input text-ink" required value={email} onChange={(e) => setEmail(e.target.value)} />
             </div>
             <button className="btn-primary w-full" type="submit" disabled={loading}>
               {loading ? "Sending..." : "Send reset link"}

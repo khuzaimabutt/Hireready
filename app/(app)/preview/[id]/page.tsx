@@ -28,7 +28,7 @@ export default async function PreviewPage({
     return (
       <div className="card text-center">
         <h2 className="font-display text-xl font-semibold">This resume hasn't been generated yet.</h2>
-        <p className="mt-1 text-slate-500">Open the builder to fill it in and run AI generation.</p>
+        <p className="mt-1 text-ink-500">Open the builder to fill it in and run AI generation.</p>
         <Link href={`/builder/${resume.id}`} className="btn-primary mt-6 inline-flex">Go to builder</Link>
       </div>
     );
@@ -54,11 +54,11 @@ export default async function PreviewPage({
 
       <aside className="space-y-4">
         <div className="card text-center">
-          <div className="text-xs font-semibold uppercase tracking-wider text-slate-500">ATS Score</div>
+          <div className="text-xs font-semibold uppercase tracking-wider text-ink-500">ATS Score</div>
           <div className="mt-3 flex justify-center">
             <AtsScoreRing score={resume.ats_score ?? 0} />
           </div>
-          <div className="mt-2 text-xs text-slate-500">
+          <div className="mt-2 text-xs text-ink-500">
             {(resume.ats_score ?? 0) >= 80 && "Strong — likely to pass screening"}
             {(resume.ats_score ?? 0) >= 60 && (resume.ats_score ?? 0) < 80 && "Decent — apply the warnings below"}
             {(resume.ats_score ?? 0) < 60 && "Needs work — address critical fixes first"}
@@ -75,7 +75,7 @@ export default async function PreviewPage({
 
         {tips.length > 0 && (
           <div className="card">
-            <div className="mb-3 text-xs font-semibold uppercase tracking-wider text-slate-500">Improvement tips</div>
+            <div className="mb-3 text-xs font-semibold uppercase tracking-wider text-ink-500">Improvement tips</div>
             <ImprovementTips tips={tips} />
           </div>
         )}

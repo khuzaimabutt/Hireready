@@ -64,12 +64,12 @@ export default function SettingsForm({ profile }: { profile: any }) {
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-wrap gap-1 rounded-lg bg-slate-100 p-1">
+      <div className="flex flex-wrap gap-1 rounded-lg bg-paper-200 p-1">
         {TABS.map((t) => (
           <button
             key={t}
             onClick={() => setTab(t)}
-            className={`rounded-md px-4 py-1.5 text-sm font-medium transition ${tab === t ? "bg-white text-brand shadow-sm" : "text-slate-600 hover:text-slate-900"}`}
+            className={`rounded-md px-4 py-1.5 text-sm font-medium transition ${tab === t ? "bg-white text-brand shadow-sm" : "text-ink-600 hover:text-ink"}`}
           >
             {t}
           </button>
@@ -87,7 +87,7 @@ export default function SettingsForm({ profile }: { profile: any }) {
             <div>
               <label className="label">Email</label>
               <input className="input" value={profile?.email ?? ""} disabled />
-              <p className="mt-1 text-[11px] text-slate-500">Contact support to change your email.</p>
+              <p className="mt-1 text-[11px] text-ink-500">Contact support to change your email.</p>
             </div>
             <div>
               <label className="label">Career stage</label>
@@ -110,12 +110,12 @@ export default function SettingsForm({ profile }: { profile: any }) {
         <div className="space-y-4">
           <div className="card">
             <h2 className="font-display text-lg font-semibold">Password</h2>
-            <p className="mt-1 text-sm text-slate-600">Change your password here. Use a strong, unique password.</p>
+            <p className="mt-1 text-sm text-ink-600">Change your password here. Use a strong, unique password.</p>
             <button onClick={changePassword} className="btn-secondary mt-4">Change password</button>
           </div>
           <div className="card">
             <h2 className="font-display text-lg font-semibold">Sessions</h2>
-            <p className="mt-1 text-sm text-slate-600">Sign out of all devices where you're currently logged in.</p>
+            <p className="mt-1 text-sm text-ink-600">Sign out of all devices where you're currently logged in.</p>
             <button onClick={signOutAll} className="btn-secondary mt-4">Sign out everywhere</button>
           </div>
           <div className="card border-red-200 bg-red-50/50">
@@ -132,16 +132,16 @@ export default function SettingsForm({ profile }: { profile: any }) {
         <div className="card">
           <h2 className="font-display text-lg font-semibold">Plan & credits</h2>
           <div className="mt-4 grid gap-4 md:grid-cols-3">
-            <div className="rounded-lg border border-slate-200 p-4">
-              <div className="text-xs uppercase tracking-wider text-slate-500">Current plan</div>
+            <div className="rounded-lg border border-line p-4">
+              <div className="text-xs uppercase tracking-wider text-ink-500">Current plan</div>
               <div className="mt-1 font-display text-xl font-semibold capitalize">{(profile?.plan ?? "free").replace("_", " ")}</div>
             </div>
-            <div className="rounded-lg border border-slate-200 p-4">
-              <div className="text-xs uppercase tracking-wider text-slate-500">Credits remaining</div>
+            <div className="rounded-lg border border-line p-4">
+              <div className="text-xs uppercase tracking-wider text-ink-500">Credits remaining</div>
               <div className="mt-1 font-display text-xl font-semibold">{profile?.credits_remaining ?? 0}</div>
             </div>
-            <div className="rounded-lg border border-slate-200 p-4">
-              <div className="text-xs uppercase tracking-wider text-slate-500">Member since</div>
+            <div className="rounded-lg border border-line p-4">
+              <div className="text-xs uppercase tracking-wider text-ink-500">Member since</div>
               <div className="mt-1 font-display text-xl font-semibold">
                 {profile?.created_at ? new Date(profile.created_at).toLocaleDateString("en-US", { month: "short", year: "numeric" }) : "—"}
               </div>
@@ -155,7 +155,7 @@ export default function SettingsForm({ profile }: { profile: any }) {
         <div className="space-y-4">
           <div className="card">
             <h2 className="font-display text-lg font-semibold">Export your data</h2>
-            <p className="mt-1 text-sm text-slate-600">
+            <p className="mt-1 text-sm text-ink-600">
               Download a JSON file containing all your profile, resumes, and payment history.
               You can re-import or use this file at any time.
             </p>
@@ -163,7 +163,7 @@ export default function SettingsForm({ profile }: { profile: any }) {
           </div>
           <div className="card">
             <h2 className="font-display text-lg font-semibold">Privacy & security</h2>
-            <ul className="mt-3 space-y-2 text-sm text-slate-600">
+            <ul className="mt-3 space-y-2 text-sm text-ink-600">
               <li>✓ All data is encrypted at rest in our database</li>
               <li>✓ Row-level security restricts access to your account only</li>
               <li>✓ We never sell or share your data with third parties</li>
@@ -171,9 +171,9 @@ export default function SettingsForm({ profile }: { profile: any }) {
             </ul>
             <div className="mt-4 flex gap-3">
               <a href="#" className="text-sm text-brand hover:underline">Privacy policy</a>
-              <span className="text-slate-300">·</span>
+              <span className="text-ink-300">·</span>
               <a href="#" className="text-sm text-brand hover:underline">Terms of service</a>
-              <span className="text-slate-300">·</span>
+              <span className="text-ink-300">·</span>
               <a href="#" className="text-sm text-brand hover:underline">Cookie policy</a>
             </div>
           </div>

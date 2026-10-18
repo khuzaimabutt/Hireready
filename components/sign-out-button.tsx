@@ -15,7 +15,7 @@ export default function SignOutButton() {
         router.push("/");
         router.refresh();
       }}
-      className="flex w-full items-center justify-between rounded px-3 py-1.5 text-sm text-slate-600 hover:bg-slate-50 hover:text-slate-900"
+      className="flex w-full items-center justify-between rounded px-3 py-1.5 text-sm text-ink-600 hover:bg-paper-100 hover:text-ink"
     >
       <span>Sign out</span>
       <span aria-hidden="true">↗</span>

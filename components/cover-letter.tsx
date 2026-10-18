@@ -52,7 +52,7 @@ export default function CoverLetter({ resumeId, defaultRole }: { resumeId: strin
       <div className="flex items-center justify-between">
         <div>
           <div className="font-display text-base font-semibold">Cover letter</div>
-          <p className="text-xs text-slate-500">AI-generate a tailored letter for this resume.</p>
+          <p className="text-xs text-ink-500">AI-generate a tailored letter for this resume.</p>
         </div>
         <button onClick={() => setOpen((v) => !v)} className="btn-secondary">
           {open ? "Hide" : "✨ Generate"}
@@ -60,7 +60,7 @@ export default function CoverLetter({ resumeId, defaultRole }: { resumeId: strin
       </div>
 
       {open && (
-        <div className="mt-4 space-y-3 border-t border-slate-100 pt-4">
+        <div className="mt-4 space-y-3 border-t border-line pt-4">
           <div className="grid gap-3 md:grid-cols-2">
             <div>
               <label className="label">Company</label>
@@ -78,7 +78,7 @@ export default function CoverLetter({ resumeId, defaultRole }: { resumeId: strin
                 <button
                   key={t}
                   onClick={() => setTone(t)}
-                  className={`rounded-full px-3 py-1 text-xs capitalize transition ${tone === t ? "bg-brand text-white" : "border border-slate-200 bg-white text-slate-600 hover:bg-slate-50"}`}
+                  className={`rounded-full px-3 py-1 text-xs capitalize transition ${tone === t ? "bg-brand text-white" : "border border-line bg-white text-ink-600 hover:bg-paper-100"}`}
                 >
                   {t}
                 </button>
@@ -91,8 +91,8 @@ export default function CoverLetter({ resumeId, defaultRole }: { resumeId: strin
           </button>
 
           {text && (
-            <div className="rounded-lg border border-slate-200 bg-slate-50 p-4">
-              <pre className="whitespace-pre-wrap font-sans text-sm leading-relaxed text-slate-800">{text}</pre>
+            <div className="rounded-lg border border-line bg-paper-50 p-4">
+              <pre className="whitespace-pre-wrap font-sans text-sm leading-relaxed text-ink-800">{text}</pre>
               <div className="mt-3 flex gap-2">
                 <button onClick={copy} className="btn-secondary flex-1">Copy</button>
                 <button onClick={download} className="btn-secondary flex-1">↓ Download .txt</button>

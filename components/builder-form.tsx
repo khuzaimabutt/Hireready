@@ -103,12 +103,12 @@ export default function BuilderForm({ resume, profile }: { resume: Resume; profi
         <div className="w-full max-w-md rounded-2xl bg-white p-8 text-center shadow-2xl float-up">
           <div className="mx-auto mb-6 inline-block h-14 w-14 animate-spin rounded-full border-4 border-brand/20 border-t-brand" />
           <h2 className="font-display text-xl font-bold">Generating your resume</h2>
-          <p className="mt-2 text-sm text-slate-600">{genMessage}</p>
+          <p className="mt-2 text-sm text-ink-600">{genMessage}</p>
           <div className="mt-6 flex items-center justify-between">
             {steps.map((s, i) => (
               <div key={s} className="flex flex-col items-center gap-1 flex-1">
-                <div className={`h-2 w-2 rounded-full ${i <= genStep ? "bg-brand" : "bg-slate-200"}`} />
-                <span className={`text-[10px] uppercase tracking-wider ${i <= genStep ? "text-brand" : "text-slate-400"}`}>{s}</span>
+                <div className={`h-2 w-2 rounded-full ${i <= genStep ? "bg-brand" : "bg-paper-300"}`} />
+                <span className={`text-[10px] uppercase tracking-wider ${i <= genStep ? "text-brand" : "text-ink-500"}`}>{s}</span>
               </div>
             ))}
           </div>
@@ -130,13 +130,13 @@ export default function BuilderForm({ resume, profile }: { resume: Resume; profi
               onChange={(e) => setTitle(e.target.value)}
               placeholder="Resume title"
             />
-            <div className="flex items-center gap-3 text-xs text-slate-500">
+            <div className="flex items-center gap-3 text-xs text-ink-500">
               <SaveStatus state={savingState} />
               <div className="flex items-center gap-1.5">
-                <div className="relative h-1.5 w-24 overflow-hidden rounded-full bg-slate-200">
+                <div className="relative h-1.5 w-24 overflow-hidden rounded-full bg-paper-300">
                   <div className="h-full bg-brand transition-all" style={{ width: `${completeness}%` }} />
                 </div>
-                <span className="font-medium text-slate-600">{completeness}%</span>
+                <span className="font-medium text-ink-600">{completeness}%</span>
               </div>
             </div>
           </div>
@@ -159,10 +159,10 @@ export default function BuilderForm({ resume, profile }: { resume: Resume; profi
 
         {/* Tabs */}
         <div className="card">
-          <div className="mb-4 flex flex-wrap gap-1 rounded-lg bg-slate-100 p-1">
+          <div className="mb-4 flex flex-wrap gap-1 rounded-lg bg-paper-200 p-1">
             {TABS.map((t) => (
               <button key={t} onClick={() => setTab(t)}
-                className={`flex-1 rounded-md px-3 py-1.5 text-sm font-medium transition ${tab === t ? "bg-white text-brand shadow-sm" : "text-slate-600 hover:text-slate-900"}`}>
+                className={`flex-1 rounded-md px-3 py-1.5 text-sm font-medium transition ${tab === t ? "bg-white text-brand shadow-sm" : "text-ink-600 hover:text-ink"}`}>
                 {t}
               </button>
             ))}
@@ -179,7 +179,7 @@ export default function BuilderForm({ resume, profile }: { resume: Resume; profi
         <div className="card flex flex-col items-start gap-3 md:flex-row md:items-center md:justify-between">
           <div>
             <div className="font-display text-lg font-semibold">Ready to generate?</div>
-            <div className="text-sm text-slate-500">
+            <div className="text-sm text-ink-500">
               Uses 1 credit · You have <strong>{profile.credits_remaining}</strong> remaining
             </div>
           </div>
@@ -192,11 +192,11 @@ export default function BuilderForm({ resume, profile }: { resume: Resume; profi
       {/* Right: live preview */}
       <aside className="lg:sticky lg:top-20 lg:h-[calc(100vh-6rem)]">
         <div className="card flex h-full flex-col overflow-hidden">
-          <div className="mb-3 flex items-center justify-between text-xs font-semibold uppercase tracking-wider text-slate-500">
+          <div className="mb-3 flex items-center justify-between text-xs font-semibold uppercase tracking-wider text-ink-500">
             <span>Live preview</span>
-            <span className="text-[10px] font-normal normal-case text-slate-400">Updates as you type</span>
+            <span className="text-[10px] font-normal normal-case text-ink-500">Updates as you type</span>
           </div>
-          <div className="flex-1 overflow-auto thin-scroll rounded-md bg-slate-50 p-4">
+          <div className="flex-1 overflow-auto thin-scroll rounded-md bg-paper-50 p-4">
             <LivePreview content={content} userType={userType} targetRole={targetRole} />
           </div>
         </div>
@@ -208,7 +208,7 @@ export default function BuilderForm({ resume, profile }: { resume: Resume; profi
 function SaveStatus({ state }: { state: "idle" | "saving" | "saved" }) {
   if (state === "saving") return <span className="inline-flex items-center gap-1.5 text-amber-600"><Dot color="bg-amber-500 pulse-soft" /> Saving…</span>;
   if (state === "saved") return <span className="inline-flex items-center gap-1.5 text-green-600"><Dot color="bg-green-500" /> Saved</span>;
-  return <span className="inline-flex items-center gap-1.5 text-slate-500"><Dot color="bg-slate-300" /> Idle</span>;
+  return <span className="inline-flex items-center gap-1.5 text-ink-500"><Dot color="bg-ink-300" /> Idle</span>;
 }
 function Dot({ color }: { color: string }) {
   return <span className={`h-1.5 w-1.5 rounded-full ${color}`} />;
@@ -291,7 +291,7 @@ function ProjectsEditor({ content, setContent, userType, targetRole }: { content
         💡 Your projects ARE your experience. Add every significant one — most-relevant first.
       </div>
       {projects.map((p, i) => (
-        <div key={i} className="rounded-lg border border-slate-200 p-4">
+        <div key={i} className="rounded-lg border border-line p-4">
           <ItemHeader idx={i} total={projects.length} onMoveUp={() => update(swap(projects, i, i - 1))} onMoveDown={() => update(swap(projects, i, i + 1))} onRemove={() => update(projects.filter((_, j) => j !== i))} />
           <div className="grid gap-3 md:grid-cols-2">
             <input className="input" placeholder="Project name" value={p.name} onChange={(e) => { const n = [...projects]; n[i] = { ...p, name: e.target.value }; update(n); }} />
@@ -323,12 +323,12 @@ function swap<T>(arr: T[], i: number, j: number): T[] {
 function ItemHeader({ idx, total, onMoveUp, onMoveDown, onRemove }: { idx: number; total: number; onMoveUp: () => void; onMoveDown: () => void; onRemove: () => void }) {
   return (
     <div className="mb-3 flex items-center justify-between">
-      <div className="text-[11px] font-medium uppercase tracking-widest text-slate-500">Item {idx + 1} of {total}</div>
+      <div className="text-[11px] font-medium uppercase tracking-widest text-ink-500">Item {idx + 1} of {total}</div>
       <div className="flex items-center gap-1">
-        <button type="button" disabled={idx === 0} onClick={onMoveUp} className="rounded p-1 text-slate-500 hover:bg-slate-100 disabled:opacity-30" title="Move up" aria-label="Move up">
+        <button type="button" disabled={idx === 0} onClick={onMoveUp} className="rounded p-1 text-ink-500 hover:bg-paper-200 disabled:opacity-30" title="Move up" aria-label="Move up">
           <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 4l6 6-1.41 1.41L10 6.83 5.41 11.41 4 10z"/></svg>
         </button>
-        <button type="button" disabled={idx === total - 1} onClick={onMoveDown} className="rounded p-1 text-slate-500 hover:bg-slate-100 disabled:opacity-30" title="Move down" aria-label="Move down">
+        <button type="button" disabled={idx === total - 1} onClick={onMoveDown} className="rounded p-1 text-ink-500 hover:bg-paper-200 disabled:opacity-30" title="Move down" aria-label="Move down">
           <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 16l-6-6 1.41-1.41L10 13.17l4.59-4.58L16 10z"/></svg>
         </button>
         <button type="button" onClick={onRemove} className="ml-2 text-xs text-red-500 hover:underline">Remove</button>
@@ -344,7 +344,7 @@ function ExperiencesEditor({ content, setContent, userType, targetRole }: { cont
   return (
     <div className="space-y-4">
       {exps.map((e, i) => (
-        <div key={i} className="rounded-lg border border-slate-200 p-4">
+        <div key={i} className="rounded-lg border border-line p-4">
           <ItemHeader idx={i} total={exps.length} onMoveUp={() => update(swap(exps, i, i - 1))} onMoveDown={() => update(swap(exps, i, i + 1))} onRemove={() => update(exps.filter((_, j) => j !== i))} />
           <div className="grid gap-3 md:grid-cols-2">
             <input className="input" placeholder="Job title" value={e.title} onChange={(ev) => { const n = [...exps]; n[i] = { ...e, title: ev.target.value }; update(n); }} />
@@ -373,7 +373,7 @@ function EducationTab({ content, setContent }: { content: ResumeContent; setCont
   return (
     <div className="space-y-4">
       {eds.map((e, i) => (
-        <div key={i} className="rounded-lg border border-slate-200 p-4">
+        <div key={i} className="rounded-lg border border-line p-4">
           <ItemHeader idx={i} total={eds.length} onMoveUp={() => update(swap(eds, i, i - 1))} onMoveDown={() => update(swap(eds, i, i + 1))} onRemove={() => update(eds.filter((_, j) => j !== i))} />
           <div className="grid gap-3 md:grid-cols-2">
             <input className="input" placeholder="Degree" value={e.degree} onChange={(ev) => { const n = [...eds]; n[i] = { ...e, degree: ev.target.value }; update(n); }} />
@@ -439,7 +439,7 @@ function TagInput({ label, value, onChange }: { label: string; value: string[]; 
   return (
     <div className="mt-3">
       <label className="label">{label}</label>
-      <div className="flex flex-wrap gap-1.5 rounded-lg border border-slate-300 bg-white px-2 py-2 focus-within:border-brand focus-within:ring-2 focus-within:ring-brand/20 transition">
+      <div className="flex flex-wrap gap-1.5 rounded-lg border border-ink-300 bg-white px-2 py-2 focus-within:border-brand focus-within:ring-2 focus-within:ring-brand/20 transition">
         {value.map((t, i) => (
           <span key={i} className="inline-flex items-center gap-1 rounded-md bg-brand/10 px-2 py-0.5 text-xs text-brand">
             {t}
@@ -503,17 +503,17 @@ function BulletEditor({
       <div className="space-y-2">
         {value.map((b, i) => {
           const len = b.length;
-          const lenColor = len > 200 ? "text-red-500" : len > 150 ? "text-amber-500" : len > 60 ? "text-green-600" : "text-slate-400";
+          const lenColor = len > 200 ? "text-red-500" : len > 150 ? "text-amber-500" : len > 60 ? "text-green-600" : "text-ink-500";
           return (
-            <div key={i} className="rounded-lg border border-slate-200 bg-white">
+            <div key={i} className="rounded-lg border border-line bg-white">
               <textarea
-                className="w-full resize-none rounded-t-lg border-none bg-transparent px-3 py-2 text-sm text-slate-900 focus:outline-none focus:ring-0"
+                className="w-full resize-none rounded-t-lg border-none bg-transparent px-3 py-2 text-sm text-ink focus:outline-none focus:ring-0"
                 rows={singleLine ? 2 : 2}
                 value={b}
                 onChange={(e) => { const n = [...value]; n[i] = e.target.value; onChange(n); }}
                 placeholder="Describe an achievement, with metrics if possible…"
               />
-              <div className="flex items-center justify-between border-t border-slate-100 bg-slate-50 px-2 py-1.5 rounded-b-lg">
+              <div className="flex items-center justify-between border-t border-line bg-paper-50 px-2 py-1.5 rounded-b-lg">
                 <button
                   type="button"
                   onClick={() => rewrite(i)}
@@ -542,12 +542,12 @@ function BulletEditor({
 function LivePreview({ content, userType, targetRole }: { content: ResumeContent; userType: UserType; targetRole: string }) {
   const p = content.personal ?? {};
   return (
-    <div className="origin-top text-[12px] text-slate-800">
+    <div className="origin-top text-[12px] text-ink-800">
       <div className="rounded-lg bg-white p-6 shadow-sm">
         <div className="border-b pb-3">
           <div className="font-display text-xl font-bold">{p.full_name || "Your Name"}</div>
           <div className="text-xs text-brand font-semibold uppercase tracking-widest">{targetRole || "Target Role"}</div>
-          <div className="mt-1 flex flex-wrap gap-x-3 text-[10px] text-slate-500">
+          <div className="mt-1 flex flex-wrap gap-x-3 text-[10px] text-ink-500">
             {p.email && <span>{p.email}</span>}
             {p.phone && <span>· {p.phone}</span>}
             {p.location && <span>· {p.location}</span>}
@@ -560,9 +560,9 @@ function LivePreview({ content, userType, targetRole }: { content: ResumeContent
           <Section title="Experience">
             {content.experiences!.map((e, i) => (
               <div key={i} className="mb-2">
-                <div className="flex justify-between font-semibold">{e.title || "Job title"} <span className="text-slate-500 font-normal">{e.start_date} – {e.end_date}</span></div>
-                <div className="italic text-slate-600">{e.company}</div>
-                <ul className="mt-1 list-disc pl-4 text-slate-700">
+                <div className="flex justify-between font-semibold">{e.title || "Job title"} <span className="text-ink-500 font-normal">{e.start_date} – {e.end_date}</span></div>
+                <div className="italic text-ink-600">{e.company}</div>
+                <ul className="mt-1 list-disc pl-4 text-ink-700">
                   {(e.bullets ?? []).filter(Boolean).slice(0, 3).map((b, j) => <li key={j}>{b}</li>)}
                 </ul>
               </div>
@@ -575,9 +575,9 @@ function LivePreview({ content, userType, targetRole }: { content: ResumeContent
             {content.projects!.map((pr, i) => (
               <div key={i} className="mb-2">
                 <div className="font-semibold">{pr.name || "Project"}</div>
-                <div className="text-slate-700">{pr.description}</div>
+                <div className="text-ink-700">{pr.description}</div>
                 <div className="mt-1 flex flex-wrap gap-1">
-                  {(pr.technologies ?? []).map((t, j) => <span key={j} className="rounded bg-slate-100 px-1.5 text-[10px]">{t}</span>)}
+                  {(pr.technologies ?? []).map((t, j) => <span key={j} className="rounded bg-paper-200 px-1.5 text-[10px]">{t}</span>)}
                 </div>
               </div>
             ))}
@@ -589,7 +589,7 @@ function LivePreview({ content, userType, targetRole }: { content: ResumeContent
             {content.educations!.map((e, i) => (
               <div key={i}>
                 <div className="font-semibold">{e.degree}{e.field ? `, ${e.field}` : ""}</div>
-                <div className="text-slate-600">{e.institution} · {e.start_year} – {e.end_year}</div>
+                <div className="text-ink-600">{e.institution} · {e.start_year} – {e.end_year}</div>
               </div>
             ))}
           </Section>
@@ -599,7 +599,7 @@ function LivePreview({ content, userType, targetRole }: { content: ResumeContent
           <Section title="Skills">
             <div className="flex flex-wrap gap-1">
               {[...(content.skills?.technical ?? []), ...(content.skills?.tools ?? [])].map((s, i) => (
-                <span key={i} className="rounded bg-slate-100 px-1.5 text-[10px]">{s}</span>
+                <span key={i} className="rounded bg-paper-200 px-1.5 text-[10px]">{s}</span>
               ))}
             </div>
           </Section>

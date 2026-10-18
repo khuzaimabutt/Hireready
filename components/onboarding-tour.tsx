@@ -48,13 +48,13 @@ export default function OnboardingTour({ shouldShow }: { shouldShow: boolean }) 
       <div className="w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl float-up">
         <div className="mb-4 flex items-center gap-1.5">
           {STEPS.map((_, i) => (
-            <div key={i} className={`h-1 flex-1 rounded-full ${i <= step ? "bg-brand" : "bg-slate-200"}`} />
+            <div key={i} className={`h-1 flex-1 rounded-full ${i <= step ? "bg-brand" : "bg-paper-300"}`} />
           ))}
         </div>
         <h3 className="font-display text-xl font-bold">{s.title}</h3>
-        <p className="mt-2 text-sm text-slate-600 leading-relaxed">{s.body}</p>
+        <p className="mt-2 text-sm text-ink-600 leading-relaxed">{s.body}</p>
         <div className="mt-6 flex items-center justify-between">
-          <button onClick={dismiss} className="text-xs text-slate-500 hover:text-slate-700">Skip tour</button>
+          <button onClick={dismiss} className="text-xs text-ink-500 hover:text-ink-700">Skip tour</button>
           <div className="flex gap-2">
             {step > 0 && <button onClick={() => setStep(step - 1)} className="btn-secondary">Back</button>}
             {!last && <button onClick={() => setStep(step + 1)} className="btn-primary">Next →</button>}

@@ -100,22 +100,22 @@ function SignupInner() {
 
             <form onSubmit={onContinue} className="space-y-4">
               <Field label="Full name">
-                <input className="input text-slate-900" required value={fullName} onChange={(e) => setFullName(e.target.value)} autoComplete="name" />
+                <input className="input text-ink" required value={fullName} onChange={(e) => setFullName(e.target.value)} autoComplete="name" />
               </Field>
               <Field label="Email">
-                <input type="email" className="input text-slate-900" required value={email} onChange={(e) => setEmail(e.target.value)} autoComplete="email" />
+                <input type="email" className="input text-ink" required value={email} onChange={(e) => setEmail(e.target.value)} autoComplete="email" />
               </Field>
               <Field label="Password">
                 <div className="relative">
-                  <input type={showPwd ? "text" : "password"} className="input pr-10 text-slate-900" required value={password} onChange={(e) => setPassword(e.target.value)} autoComplete="new-password" />
-                  <button type="button" onClick={() => setShowPwd((v) => !v)} className="absolute right-2 top-1/2 -translate-y-1/2 text-xs text-slate-500 hover:text-slate-700">
+                  <input type={showPwd ? "text" : "password"} className="input pr-10 text-ink" required value={password} onChange={(e) => setPassword(e.target.value)} autoComplete="new-password" />
+                  <button type="button" onClick={() => setShowPwd((v) => !v)} className="absolute right-2 top-1/2 -translate-y-1/2 text-xs text-ink-500 hover:text-ink-700">
                     {showPwd ? "Hide" : "Show"}
                   </button>
                 </div>
                 <PasswordStrength password={password} />
               </Field>
               <Field label="Confirm password">
-                <input type={showPwd ? "text" : "password"} className="input text-slate-900" required value={confirm} onChange={(e) => setConfirm(e.target.value)} />
+                <input type={showPwd ? "text" : "password"} className="input text-ink" required value={confirm} onChange={(e) => setConfirm(e.target.value)} />
               </Field>
               <button className="btn-primary w-full" type="submit">Continue →</button>
             </form>
