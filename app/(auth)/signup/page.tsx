@@ -11,7 +11,7 @@ import PasswordStrength, { passwordScore } from "@/components/password-strength"
 
 export default function SignupPage() {
   return (
-    <Suspense fallback={<div className="text-white/60">Loading...</div>}>
+    <Suspense fallback={<div className="text-ink-600">Loading...</div>}>
       <SignupInner />
     </Suspense>
   );
@@ -71,31 +71,31 @@ function SignupInner() {
 
   return (
     <div className="w-full">
-      <Link href="/" className="mb-6 inline-flex items-center gap-2 text-sm text-white/70 hover:text-white transition">← Back</Link>
+      <Link href="/" className="mb-6 inline-flex items-center gap-2 text-sm font-medium text-ink-600 transition hover:text-ink">← Back</Link>
 
-      <div className="glass rounded-2xl p-8">
+      <div className="rounded-2xl border border-line bg-white p-6 shadow-lift sm:p-8">
         {/* Step indicator */}
         <div className="mb-6 flex items-center gap-2 text-xs">
-          <span className={`flex h-6 w-6 items-center justify-center rounded-full text-[11px] font-bold ${step >= 1 ? "bg-brand text-white" : "bg-white/10 text-white/50"}`}>1</span>
-          <span className={`text-[11px] uppercase tracking-widest ${step >= 1 ? "text-white" : "text-white/40"}`}>Account</span>
-          <div className={`h-px flex-1 ${step >= 2 ? "bg-brand" : "bg-white/10"}`} />
-          <span className={`flex h-6 w-6 items-center justify-center rounded-full text-[11px] font-bold ${step >= 2 ? "bg-brand text-white" : "bg-white/10 text-white/50"}`}>2</span>
-          <span className={`text-[11px] uppercase tracking-widest ${step >= 2 ? "text-white" : "text-white/40"}`}>Level</span>
+          <span className={`flex h-6 w-6 items-center justify-center rounded-full text-[11px] font-bold ${step >= 1 ? "bg-brand text-white" : "bg-line text-ink-500"}`}>1</span>
+          <span className={`text-[11px] uppercase tracking-widest ${step >= 1 ? "text-ink" : "text-ink-500"}`}>Account</span>
+          <div className={`h-px flex-1 ${step >= 2 ? "bg-brand" : "bg-line"}`} />
+          <span className={`flex h-6 w-6 items-center justify-center rounded-full text-[11px] font-bold ${step >= 2 ? "bg-brand text-white" : "bg-line text-ink-500"}`}>2</span>
+          <span className={`text-[11px] uppercase tracking-widest ${step >= 2 ? "text-ink" : "text-ink-500"}`}>Level</span>
         </div>
 
         {step === 1 ? (
           <>
-            <h1 className="font-display text-2xl font-bold">Create your account</h1>
-            <p className="mt-1 text-sm text-white/60">Free forever — no credit card required.</p>
+            <h1 className="font-display text-[32px] font-medium leading-tight">Create your account</h1>
+            <p className="mt-1 text-sm text-ink-600">Free forever. No credit card required.</p>
 
             <div className="mt-6">
               <OAuthButtons next="/dashboard" />
             </div>
 
-            <div className="my-5 flex items-center gap-3 text-[11px] uppercase tracking-widest text-white/40">
-              <div className="h-px flex-1 bg-white/10" />
+            <div className="my-5 flex items-center gap-3 text-[11px] uppercase tracking-widest text-ink-500">
+              <div className="h-px flex-1 bg-line" />
               or with email
-              <div className="h-px flex-1 bg-white/10" />
+              <div className="h-px flex-1 bg-line" />
             </div>
 
             <form onSubmit={onContinue} className="space-y-4">
@@ -122,8 +122,8 @@ function SignupInner() {
           </>
         ) : (
           <>
-            <h1 className="font-display text-2xl font-bold">Tell us about you</h1>
-            <p className="mt-1 text-sm text-white/60">We'll tailor everything to your level.</p>
+            <h1 className="font-display text-[32px] font-medium leading-tight">Tell us about you</h1>
+            <p className="mt-1 text-sm text-ink-600">We'll tailor everything to your level.</p>
 
             <div className="mt-6 space-y-3">
               {(["fresher", "intermediate", "professional"] as UserType[]).map((t) => {
@@ -134,15 +134,15 @@ function SignupInner() {
                     key={t}
                     onClick={() => setUserType(t)}
                     className={`flex w-full gap-4 rounded-xl border p-4 text-left transition ${
-                      selected ? "border-brand bg-brand/15 ring-1 ring-brand" : "border-white/10 hover:bg-white/5"
+                      selected ? "border-brand bg-brand-50 ring-1 ring-brand" : "border-line hover:bg-paper-50"
                     }`}
                   >
-                    <div className="text-3xl">{meta.emoji}</div>
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-line bg-paper-50 font-display text-sm italic text-brand">{t === "fresher" ? "01" : t === "intermediate" ? "02" : "03"}</div>
                     <div className="flex-1">
                       <div className="font-display font-semibold">{meta.title}</div>
-                      <div className="text-xs text-white/60">{meta.desc}</div>
+                      <div className="text-xs text-ink-600">{meta.desc}</div>
                     </div>
-                    <div className={`mt-1 h-5 w-5 shrink-0 rounded-full border-2 transition ${selected ? "border-brand bg-brand" : "border-white/20"}`}>
+                    <div className={`mt-1 h-5 w-5 shrink-0 rounded-full border-2 transition ${selected ? "border-brand bg-brand" : "border-ink-300"}`}>
                       {selected && <span className="block text-center text-[11px] leading-4 text-white">✓</span>}
                     </div>
                   </button>
@@ -159,13 +159,13 @@ function SignupInner() {
           </>
         )}
 
-        <div className="mt-6 text-center text-sm text-white/60">
+        <div className="mt-6 text-center text-sm text-ink-600">
           Already have an account? <Link href="/login" className="text-brand hover:underline">Sign in</Link>
         </div>
       </div>
 
-      <p className="mt-6 text-center text-xs text-white/40">
-        By signing up you agree to our <a href="#" className="underline hover:text-white/70">Terms</a> and <a href="#" className="underline hover:text-white/70">Privacy Policy</a>.
+      <p className="mt-6 text-center text-xs text-ink-500">
+        By signing up you agree to our <a href="#" className="underline hover:text-ink-600">Terms</a> and <a href="#" className="underline hover:text-ink-600">Privacy Policy</a>.
       </p>
     </div>
   );
@@ -174,7 +174,7 @@ function SignupInner() {
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div>
-      <label className="mb-1 block text-xs font-medium uppercase tracking-wider text-white/70">{label}</label>
+      <label className="label">{label}</label>
       {children}
     </div>
   );

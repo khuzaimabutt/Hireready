@@ -1,61 +1,41 @@
 import Link from "next/link";
+import Logo from "@/components/logo";
 
 export default function AuthLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="min-h-screen bg-navy bg-hero-mesh text-white">
-      <div className="mx-auto grid min-h-screen max-w-6xl px-6 py-8 lg:grid-cols-2 lg:gap-10 lg:px-10">
-        {/* Marketing rail */}
-        <div className="hidden flex-col justify-between lg:flex">
-          <Link href="/" className="flex items-center gap-2 font-display text-xl font-bold">
-            <span className="inline-block h-7 w-7 rounded-md bg-gradient-to-br from-brand to-gold" />
-            ResumeAI <span className="text-gold">Pro</span>
-          </Link>
+    <div className="min-h-screen bg-paper text-ink">
+      <div className="grid min-h-screen lg:grid-cols-[1fr_1.05fr]">
+        {/* Editorial rail */}
+        <aside className="relative hidden overflow-hidden bg-ink px-12 py-10 text-white lg:flex lg:flex-col lg:justify-between">
+          <div className="rule-lines absolute inset-0 opacity-[0.12]" aria-hidden="true" />
+          <div className="relative"><Logo tone="light" /></div>
 
-          <div className="space-y-8">
-            <div>
-              <h2 className="font-display text-3xl font-bold leading-tight">
-                Build a resume that <span className="bg-gradient-to-r from-brand to-gold bg-clip-text text-transparent">gets you hired</span>.
-              </h2>
-              <p className="mt-3 text-white/60">
-                Join 12,400+ job seekers building ATS-optimized resumes in 60 seconds.
-              </p>
-            </div>
-
-            <div className="space-y-4">
-              <Bullet>Real-time ATS score with categorized improvement tips</Bullet>
-              <Bullet>One-click AI rewrites for every bullet point</Bullet>
-              <Bullet>Export to PDF, DOCX, or plain text</Bullet>
-              <Bullet>Tailored layouts for fresher, intermediate, executive</Bullet>
-            </div>
-
-            <div className="glass rounded-2xl p-5">
-              <div className="flex gap-1 text-gold">
-                {"★★★★★".split("").map((s, j) => <span key={j}>{s}</span>)}
-              </div>
-              <p className="mt-2 text-sm text-white/80">
-                "Got 3 interviews in my first week. The ATS score feature alone is worth it."
-              </p>
-              <div className="mt-3 flex items-center gap-3">
-                <div className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-pink-500 to-orange-500 text-xs font-bold">PS</div>
-                <div>
-                  <div className="text-sm font-semibold">Priya Sharma</div>
-                  <div className="text-xs text-white/50">Software Engineer · Stripe</div>
-                </div>
-              </div>
-            </div>
+          <div className="relative max-w-md">
+            <h2 className="font-display text-[44px] font-medium leading-[1.05]">
+              A resume that reads like you <em className="font-normal italic text-brand-100">meant every line.</em>
+            </h2>
+            <ul className="mt-10 space-y-4 text-[15px] text-white/80">
+              <Bullet>ATS score with tips sorted by severity</Bullet>
+              <Bullet>One-click rewrites for any bullet point</Bullet>
+              <Bullet>Export to PDF, DOCX or plain text</Bullet>
+              <Bullet>Layouts for fresher, intermediate and executive</Bullet>
+            </ul>
           </div>
 
-          <div className="flex gap-4 text-xs text-white/40">
-            <span>© {new Date().getFullYear()} ResumeAI Pro</span>
-            <a href="/" className="hover:text-white/70 transition">Privacy</a>
-            <a href="/" className="hover:text-white/70 transition">Terms</a>
+          <div className="relative flex gap-5 text-xs text-white/60">
+            <span>&copy; {new Date().getFullYear()} ResumeAI Pro</span>
+            <Link href="/" className="transition hover:text-white">Home</Link>
+            <Link href="/#faq" className="transition hover:text-white">FAQ</Link>
           </div>
-        </div>
+        </aside>
 
         {/* Form area */}
-        <div className="flex items-center justify-center">
-          <div className="w-full max-w-md">{children}</div>
-        </div>
+        <main className="flex flex-col px-4 py-6 sm:px-8 lg:py-10">
+          <div className="lg:hidden"><Logo /></div>
+          <div className="flex flex-1 items-center justify-center py-10">
+            <div className="w-full max-w-[420px]">{children}</div>
+          </div>
+        </main>
       </div>
     </div>
   );
@@ -63,9 +43,12 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
 
 function Bullet({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex items-start gap-3">
-      <span className="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-brand to-gold text-xs font-bold">✓</span>
-      <span className="text-sm text-white/80">{children}</span>
-    </div>
+    <li className="flex items-start gap-3">
+      <svg width="18" height="18" viewBox="0 0 18 18" className="mt-0.5 shrink-0" aria-hidden="true">
+        <circle cx="9" cy="9" r="8.25" fill="none" stroke="rgba(207,230,224,0.45)" strokeWidth="1.2" />
+        <path d="M5.5 9.3 7.8 11.5l4.7-5" stroke="#CFE6E0" strokeWidth="1.6" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+      <span>{children}</span>
+    </li>
   );
 }

@@ -33,19 +33,19 @@ export default function ResetPasswordPage() {
 
   return (
     <div className="w-full">
-      <Link href="/" className="mb-6 inline-flex items-center gap-2 text-sm text-white/70 hover:text-white transition">← Back</Link>
-      <div className="glass rounded-2xl p-8">
-        <h1 className="font-display text-2xl font-bold">Set a new password</h1>
-        <p className="mt-1 text-sm text-white/60">Choose something strong you'll remember.</p>
+      <Link href="/" className="mb-6 inline-flex items-center gap-2 text-sm font-medium text-ink-600 transition hover:text-ink">← Back</Link>
+      <div className="rounded-2xl border border-line bg-white p-6 shadow-lift sm:p-8">
+        <h1 className="font-display text-[32px] font-medium leading-tight">Set a new password</h1>
+        <p className="mt-1 text-sm text-ink-600">Choose something strong you'll remember.</p>
 
         <form onSubmit={onSubmit} className="mt-6 space-y-4">
           <div>
-            <label className="mb-1 block text-xs font-medium uppercase tracking-wider text-white/70">New password</label>
+            <label className="label">New password</label>
             <input type="password" className="input text-ink" required value={password} onChange={(e) => setPassword(e.target.value)} />
             <PasswordStrength password={password} />
           </div>
           <div>
-            <label className="mb-1 block text-xs font-medium uppercase tracking-wider text-white/70">Confirm</label>
+            <label className="label">Confirm</label>
             <input type="password" className="input text-ink" required value={confirm} onChange={(e) => setConfirm(e.target.value)} />
           </div>
           <button className="btn-primary w-full" type="submit" disabled={loading}>

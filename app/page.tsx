@@ -1,313 +1,413 @@
 import Link from "next/link";
+import Logo from "@/components/logo";
 
 export default function LandingPage() {
   return (
-    <div className="relative min-h-screen text-white">
-      {/* Fixed colorful wallpaper — stays in place while content scrolls over it */}
-      <div className="fixed inset-0 -z-10 bg-navy bg-hero-mesh" aria-hidden="true" />
-
+    <div className="min-h-screen bg-paper text-ink">
+      <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-ink focus:px-3 focus:py-2 focus:text-white">
+        Skip to content
+      </a>
       <Nav />
-      <Hero />
-      <TrustedBy />
-      <UserTypes />
-      <AiDemo />
-      <HowItWorks />
-      <Features />
-      <Testimonials />
-      <Pricing />
-      <Faq />
-      <FinalCta />
+      <main id="main">
+        <Hero />
+        <Facts />
+        <Stages />
+        <RewriteDemo />
+        <HowItWorks />
+        <Features />
+        <Pricing />
+        <Faq />
+        <FinalCta />
+      </main>
       <Footer />
     </div>
   );
 }
 
+/* ---------------------------------------------------------------- Nav */
+
 function Nav() {
   return (
-    <header className="sticky top-0 z-30 border-b border-white/10 bg-navy/70 backdrop-blur-xl">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        <Link href="/" className="flex items-center gap-2 font-display text-xl font-bold">
-          <span className="inline-block h-7 w-7 rounded-md bg-gradient-to-br from-brand to-gold" />
-          ResumeAI <span className="text-gold">Pro</span>
-        </Link>
-        <nav className="hidden gap-6 text-sm text-white/80 md:flex">
-          <a href="#how" className="hover:text-white transition">How it works</a>
-          <a href="#features" className="hover:text-white transition">Features</a>
-          <a href="#pricing" className="hover:text-white transition">Pricing</a>
-          <a href="#faq" className="hover:text-white transition">FAQ</a>
+    <header className="sticky top-0 z-30 border-b border-line/80 bg-paper/85 backdrop-blur-md">
+      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3.5 sm:px-6">
+        <Logo />
+        <nav aria-label="Primary" className="hidden items-center gap-7 text-sm font-medium text-ink-600 md:flex">
+          <a href="#how" className="transition hover:text-ink">How it works</a>
+          <a href="#features" className="transition hover:text-ink">Features</a>
+          <a href="#pricing" className="transition hover:text-ink">Pricing</a>
+          <a href="#faq" className="transition hover:text-ink">FAQ</a>
         </nav>
-        <div className="flex gap-2">
-          <Link href="/login" className="btn-ghost">Sign in</Link>
-          <Link href="/signup" className="btn-primary">Start free</Link>
+        <div className="flex items-center gap-2">
+          <Link href="/login" className="hidden rounded-lg px-3 py-2 text-sm font-semibold text-ink-700 transition hover:text-ink sm:inline-flex">Sign in</Link>
+          <Link href="/signup" className="btn-primary !px-4 !py-2">Start free</Link>
         </div>
       </div>
     </header>
   );
 }
 
+/* --------------------------------------------------------------- Hero */
+
 function Hero() {
   return (
     <section className="relative overflow-hidden">
-      <div className="mx-auto grid max-w-6xl items-center gap-10 px-6 py-20 md:grid-cols-2 md:py-28">
+      <div className="paper-grain absolute inset-0 -z-10 opacity-70" aria-hidden="true" />
+      <div className="mx-auto grid max-w-6xl items-center gap-14 px-4 pb-20 pt-14 sm:px-6 md:pt-20 lg:grid-cols-[1.05fr_1fr] lg:gap-10 lg:pb-28">
         <div className="fade-in">
-          <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs text-white/80">
-            <span className="h-1.5 w-1.5 rounded-full bg-gold pulse-soft" /> Powered by AI · ATS-Optimized
+          <span className="chip">
+            <span className="h-1.5 w-1.5 rounded-full bg-brand" aria-hidden="true" />
+            Resume builder for every career stage
           </span>
-          <h1 className="font-display text-4xl font-extrabold leading-tight md:text-6xl lg:text-7xl">
-            Build a Resume That{" "}
-            <span className="bg-gradient-to-r from-brand to-gold bg-clip-text text-transparent">Gets You Hired</span>{" "}
-            — In 60 Seconds
+          <h1 className="mt-6 font-display text-[44px] font-medium leading-[1.02] sm:text-6xl lg:text-[72px]">
+            Your experience,
+            <br />
+            written the way <em className="font-normal italic text-brand">recruiters read.</em>
           </h1>
-          <p className="mt-5 max-w-xl text-lg text-white/70">
-            AI-powered resume builder tailored to your experience level. Fresher, intermediate, or professional — we speak your language.
+          <p className="mt-6 max-w-lg text-lg leading-relaxed text-ink-600">
+            Fill in a guided form, pick your level, and get a clean, ATS-friendly resume with a score and specific fixes. Edit every line, then export to PDF, DOCX or plain text.
           </p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Link href="/signup" className="btn-primary">Build my resume free →</Link>
-            <a href="#examples" className="btn-ghost">See examples</a>
+          <div className="mt-9 flex flex-wrap items-center gap-3">
+            <Link href="/signup" className="btn-primary !px-6 !py-3 text-[15px]">
+              Build my resume
+              <Arrow />
+            </Link>
+            <a href="#how" className="btn-ghost !px-6 !py-3 text-[15px]">See how it works</a>
           </div>
-          <div className="mt-8 flex flex-wrap items-center gap-3 text-xs text-white/60">
-            <Badge>ATS Optimized</Badge>
-            <Badge>AI Powered</Badge>
-            <Badge>PDF + DOCX Export</Badge>
-            <Badge>3 User Levels</Badge>
-          </div>
-          <div className="mt-6 flex items-center gap-3 text-xs text-white/50">
-            <div className="flex -space-x-2">
-              {["#2563EB","#F59E0B","#10B981","#EC4899"].map((c, i) => (
-                <span key={i} className="h-7 w-7 rounded-full ring-2 ring-navy" style={{ background: c }} />
-              ))}
-            </div>
-            <span>Joined by <strong className="text-white/80">12,400+</strong> job seekers this month</span>
-          </div>
+          <p className="mt-5 text-sm text-ink-500">Free plan includes one resume. No card needed.</p>
         </div>
 
-        <MockResumePreview />
+        <ProductShot />
       </div>
     </section>
   );
 }
 
-function TrustedBy() {
-  const logos = ["Google", "Meta", "Stripe", "Airbnb", "Notion", "Vercel", "Linear", "Spotify"];
+function ProductShot() {
   return (
-    <section className="border-y border-white/5 bg-navy/60 backdrop-blur-sm py-10">
-      <div className="mx-auto max-w-6xl px-6">
-        <div className="text-center text-xs uppercase tracking-widest text-white/40">
-          Hires landed at
-        </div>
-        <div className="mt-6 overflow-hidden">
-          <div className="marquee">
-            {[...logos, ...logos].map((l, i) => (
-              <div key={i} className="mx-8 shrink-0 font-display text-2xl font-bold text-white/30 transition hover:text-white/60">
-                {l}
-              </div>
-            ))}
+    <div className="fade-in-delay-2 relative mx-auto w-full max-w-[520px]" aria-label="Example resume preview with ATS score" role="img">
+      {/* back sheet */}
+      <div className="absolute inset-x-6 -bottom-3 top-6 rotate-[2.5deg] rounded-xl border border-line bg-paper-50 shadow-lift" aria-hidden="true" />
+      {/* resume sheet */}
+      <div className="relative rounded-xl border border-line bg-white p-7 shadow-sheet sm:p-9" aria-hidden="true">
+        <div className="flex items-end justify-between gap-4 border-b border-ink pb-4">
+          <div>
+            <div className="font-display text-2xl font-semibold leading-none">Alex Morgan</div>
+            <div className="mt-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-ink-500">Software Engineer</div>
+          </div>
+          <div className="text-right text-[11px] leading-5 text-ink-500">
+            <div>Portfolio link</div>
+            <div>City, Country</div>
           </div>
         </div>
+        <SheetHeading>Summary</SheetHeading>
+        <p className="text-[12px] leading-relaxed text-ink-700">
+          Engineer with 4 years building production web platforms. Turns loose requirements into reliable, well-tested systems.
+        </p>
+        <SheetHeading>Experience</SheetHeading>
+        <div className="flex items-baseline justify-between text-[12px]">
+          <span className="font-semibold">Senior Engineer, Example Co.</span>
+          <span className="text-ink-500">2021 to now</span>
+        </div>
+        <ul className="mt-1.5 space-y-1 text-[12px] leading-relaxed text-ink-700">
+          <li className="flex gap-2"><span className="mt-[7px] h-1 w-1 shrink-0 rounded-full bg-ink" />Led the move to containers, raising uptime to 99.9%.</li>
+          <li className="flex gap-2 rounded bg-brand-50 px-1 -mx-1"><span className="mt-[7px] h-1 w-1 shrink-0 rounded-full bg-brand" />Cut API latency 42% across five services.</li>
+        </ul>
+        <SheetHeading>Skills</SheetHeading>
+        <div className="flex flex-wrap gap-1.5 text-[11px]">
+          {["TypeScript", "React", "Next.js", "PostgreSQL", "AWS"].map((s) => (
+            <span key={s} className="rounded border border-line px-2 py-0.5 text-ink-700">{s}</span>
+          ))}
+        </div>
       </div>
-    </section>
-  );
-}
 
-function UserTypes() {
-  return (
-    <section id="how" className="bg-navy/80 backdrop-blur-sm">
-      <div className="mx-auto max-w-6xl px-6 py-20">
-      <SectionHeader eyebrow="Who is this for" title="Built for Every Stage of Your Career" />
-      <div className="mt-12 grid gap-6 md:grid-cols-3">
-        <UserTypeCard
-          emoji="🎓"
-          title="Fresh Graduate"
-          desc="No experience? No problem. We turn your projects, education, and skills into a resume that gets interviews."
-          bullets={["Projects-first layout", "Skills highlighting", "Education focus", "Entry-level language"]}
-          href="/signup?type=fresher"
-          cta="Start as Fresher"
-        />
-        <UserTypeCard
-          emoji="💼"
-          title="Working Professional"
-          desc="1-5 years in? Let AI rewrite your experience with powerful action verbs and quantified achievements."
-          bullets={["Experience-focused layout", "Achievement rewriting", "Career progression", "Mid-level positioning"]}
-          href="/signup?type=intermediate"
-          cta="Start as Intermediate"
-          highlight
-        />
-        <UserTypeCard
-          emoji="👑"
-          title="Senior Executive"
-          desc="5+ years of leadership? Get an executive-grade resume that showcases your impact, not your responsibilities."
-          bullets={["Executive summary", "Metrics & impact focus", "Leadership highlighting", "C-suite language"]}
-          href="/signup?type=professional"
-          cta="Start as Professional"
-        />
-      </div>
-      </div>
-    </section>
-  );
-}
-
-function AiDemo() {
-  return (
-    <section className="bg-navy/80 backdrop-blur-sm">
-      <div className="mx-auto max-w-6xl px-6 py-16">
-      <SectionHeader eyebrow="See the AI in action" title="From Boring Bullet to Interview-Ready" />
-      <div className="mt-12 grid gap-4 md:grid-cols-3">
-        <DemoCard
-          step={1}
-          label="What you write"
-          color="from-slate-600/30 to-slate-700/30"
-          textColor="text-white/70"
-        >
-          <p className="font-mono text-sm">
-            "Worked on the website redesign. Helped users find what they needed."
-          </p>
-        </DemoCard>
-        <DemoCard
-          step={2}
-          label="AI rewrites it"
-          color="from-brand/30 to-brand/20"
-          textColor="text-white"
-          accent
-        >
-          <p className="font-mono text-sm">
-            <span className="bg-brand/30 px-1 rounded">Spearheaded</span> redesign of consumer-facing website,{" "}
-            <span className="bg-gold/30 px-1 rounded">improving task-completion by 42%</span> across <span className="bg-gold/30 px-1 rounded">10K+ daily users</span>.
-          </p>
-        </DemoCard>
-        <DemoCard
-          step={3}
-          label="ATS approved"
-          color="from-green-500/20 to-emerald-500/10"
-          textColor="text-white"
-        >
-          <div className="flex items-center justify-between">
-            <div>
-              <div className="text-xs uppercase tracking-widest text-green-300">ATS Score</div>
-              <div className="font-display text-3xl font-bold text-green-300">92<span className="text-sm text-white/50">/100</span></div>
-            </div>
-            <div className="text-3xl">✓</div>
+      {/* ATS panel */}
+      <div className="float-up absolute -left-3 bottom-10 w-48 rounded-xl border border-line bg-white p-4 shadow-lift sm:-left-10" aria-hidden="true">
+        <div className="flex items-center gap-3">
+          <ScoreDial value={94} />
+          <div>
+            <div className="text-[10px] font-semibold uppercase tracking-[0.16em] text-ink-500">ATS score</div>
+            <div className="text-sm font-semibold text-brand">Strong</div>
           </div>
-          <ul className="mt-3 space-y-1 text-xs text-white/70">
-            <li>✓ Quantified impact</li>
-            <li>✓ Strong action verb</li>
-            <li>✓ Role keywords present</li>
-          </ul>
-        </DemoCard>
+        </div>
+        <ul className="mt-3 space-y-1.5 border-t border-line pt-3 text-[11px] text-ink-600">
+          <li className="flex items-center gap-2"><Tick /> Quantified impact</li>
+          <li className="flex items-center gap-2"><Tick /> Standard headings</li>
+          <li className="flex items-center gap-2"><Tick muted /> Add 2 role keywords</li>
+        </ul>
       </div>
-      </div>
-    </section>
-  );
-}
 
-function DemoCard({ step, label, color, textColor, accent, children }: {
-  step: number; label: string; color: string; textColor: string; accent?: boolean; children: React.ReactNode;
-}) {
-  return (
-    <div className={`relative rounded-2xl border border-white/10 bg-gradient-to-br ${color} p-6 ${accent ? "ring-1 ring-brand/40" : ""}`}>
-      <div className="mb-3 flex items-center gap-2">
-        <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-white/10 text-xs font-bold">{step}</span>
-        <span className="text-xs uppercase tracking-widest text-white/50">{label}</span>
+      {/* rewrite chip */}
+      <div className="float-up absolute -right-2 -top-5 rounded-lg bg-ink px-3.5 py-2.5 text-[11px] text-white shadow-lift sm:-right-6" aria-hidden="true">
+        <div className="font-semibold text-brand-100">Bullet rewritten</div>
+        <div className="text-white/75">&ldquo;Worked on APIs&rdquo; to measurable result</div>
       </div>
-      <div className={textColor}>{children}</div>
     </div>
   );
 }
 
-function HowItWorks() {
+function SheetHeading({ children }: { children: React.ReactNode }) {
+  return <div className="mb-1.5 mt-5 text-[10px] font-bold uppercase tracking-[0.2em] text-ink">{children}</div>;
+}
+
+function ScoreDial({ value }: { value: number }) {
+  const r = 18;
+  const c = 2 * Math.PI * r;
   return (
-    <section className="bg-navy/80 backdrop-blur-sm py-20">
-      <div className="mx-auto max-w-6xl px-6">
-        <SectionHeader eyebrow="How it works" title="Three Steps to Your Perfect Resume" />
-        <div className="mt-12 grid gap-6 md:grid-cols-3">
-          <Step n={1} title="Choose Your Level" body="Select fresher, intermediate, or professional." />
-          <Step n={2} title="Fill Your Details" body="A smart form that adapts to your experience level." />
-          <Step n={3} title="AI Does the Magic" body="Get a polished, ATS-ready resume in seconds." />
+    <svg width="48" height="48" viewBox="0 0 48 48" aria-hidden="true">
+      <circle cx="24" cy="24" r={r} fill="none" stroke="#E8F3F0" strokeWidth="5" />
+      <circle cx="24" cy="24" r={r} fill="none" stroke="#0F6E5E" strokeWidth="5" strokeLinecap="round"
+        strokeDasharray={c} strokeDashoffset={c * (1 - value / 100)} transform="rotate(-90 24 24)" />
+      <text x="24" y="28.5" textAnchor="middle" fontSize="13" fontWeight="700" fill="#15171C">{value}</text>
+    </svg>
+  );
+}
+
+/* -------------------------------------------- Facts (no social proof) */
+
+function Facts() {
+  const facts = [
+    { k: "3", v: "career-stage layouts", d: "Fresher, intermediate and professional" },
+    { k: "0 to 100", v: "ATS score", d: "With tips sorted by severity" },
+    { k: "3", v: "export formats", d: "PDF, editable DOCX, plain TXT" },
+    { k: "1", v: "free resume", d: "Upgrade only if you need more" },
+  ];
+  return (
+    <section aria-label="Product facts" className="border-y border-line bg-white">
+      <dl className="mx-auto grid max-w-6xl grid-cols-2 divide-line px-4 sm:px-6 md:grid-cols-4 md:divide-x">
+        {facts.map((f) => (
+          <div key={f.v} className="px-2 py-7 md:px-8">
+            <dt className="text-sm font-semibold text-ink">{f.v}</dt>
+            <dd className="mt-0.5 font-display text-3xl font-medium text-ink">{f.k}</dd>
+            <dd className="mt-1 text-[13px] text-ink-500">{f.d}</dd>
+          </div>
+        ))}
+      </dl>
+    </section>
+  );
+}
+
+/* ------------------------------------------------------------- Stages */
+
+function Stages() {
+  const stages = [
+    {
+      n: "01", title: "Fresh graduate", href: "/signup?type=fresher", cta: "Start as fresher",
+      desc: "Little or no work history? Projects, education and skills move to the top and do the talking.",
+      bullets: ["Projects-first layout", "Skills highlighted", "Entry-level language"],
+    },
+    {
+      n: "02", title: "Working professional", href: "/signup?type=intermediate", cta: "Start as intermediate",
+      desc: "One to five years in. Experience leads, rewritten with action verbs and measurable results.",
+      bullets: ["Experience-first layout", "Achievement rewriting", "Clear progression"],
+    },
+    {
+      n: "03", title: "Senior and executive", href: "/signup?type=professional", cta: "Start as professional",
+      desc: "Five years or more of leadership. An executive summary that leads with impact, not duties.",
+      bullets: ["Executive summary", "Metrics and scope", "Leadership focus"],
+    },
+  ];
+  return (
+    <section className="mx-auto max-w-6xl px-4 py-24 sm:px-6 md:py-32">
+      <SectionHeader eyebrow="Who it is for" title="Tuned to where you are in your career" body="Choose a level at sign-up. The form, the section order and the wording all adapt to it." />
+      <div className="mt-14 grid gap-px overflow-hidden rounded-2xl border border-line bg-line md:grid-cols-3">
+        {stages.map((s) => (
+          <div key={s.n} className="group flex flex-col bg-white p-8 transition hover:bg-paper-50">
+            <div className="font-display text-sm italic text-brand">{s.n}</div>
+            <h3 className="mt-3 font-display text-2xl font-medium">{s.title}</h3>
+            <p className="mt-3 text-[15px] leading-relaxed text-ink-600">{s.desc}</p>
+            <ul className="mt-6 space-y-2 text-sm text-ink-700">
+              {s.bullets.map((b) => <li key={b} className="flex items-center gap-2.5"><Tick />{b}</li>)}
+            </ul>
+            <Link href={s.href} className="mt-8 inline-flex items-center gap-1.5 text-sm font-semibold text-ink underline decoration-line decoration-2 underline-offset-4 transition group-hover:decoration-brand">
+              {s.cta} <Arrow />
+            </Link>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+/* ------------------------------------------------------- Rewrite demo */
+
+function RewriteDemo() {
+  return (
+    <section className="bg-ink text-white">
+      <div className="mx-auto max-w-6xl px-4 py-24 sm:px-6 md:py-28">
+        <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+          <div>
+            <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-brand-100">The rewrite</div>
+            <h2 className="mt-4 font-display text-4xl font-medium leading-tight md:text-5xl">From a vague line to one that earns the interview.</h2>
+            <p className="mt-5 max-w-md text-[15px] leading-relaxed text-white/70">
+              Every bullet can be rewritten in one click: a strong verb up front, scope and result made explicit. You keep the final say on every word.
+            </p>
+            <p className="mt-6 text-xs text-white/60">Illustrative example. Numbers come from what you enter.</p>
+          </div>
+
+          <div className="space-y-3">
+            <div className="rounded-xl border border-white/10 bg-white/[0.04] p-6">
+              <div className="text-[11px] font-semibold uppercase tracking-[0.16em] text-white/60">What you wrote</div>
+              <p className="mt-3 text-[15px] leading-relaxed text-white/75 line-through decoration-white/30">
+                Worked on the website redesign. Helped users find what they needed.
+              </p>
+            </div>
+            <div className="rounded-xl bg-paper p-6 text-ink shadow-sheet">
+              <div className="flex items-center justify-between">
+                <div className="text-[11px] font-semibold uppercase tracking-[0.16em] text-brand">Rewritten</div>
+                <span className="rounded-full bg-brand-50 px-2.5 py-0.5 text-[11px] font-semibold text-brand-800">ATS 92 / 100</span>
+              </div>
+              <p className="mt-3 font-display text-xl leading-snug">
+                <mark className="bg-brand-100/70 px-0.5 text-ink">Led</mark> the redesign of the customer website,{" "}
+                <mark className="bg-gold-50 px-0.5 text-ink">raising task completion 42%</mark> for{" "}
+                <mark className="bg-gold-50 px-0.5 text-ink">10K+ daily users</mark>.
+              </p>
+              <div className="mt-5 flex flex-wrap gap-2 border-t border-line pt-4 text-xs text-ink-600">
+                <span className="chip"><Tick /> Action verb</span>
+                <span className="chip"><Tick /> Quantified result</span>
+                <span className="chip"><Tick /> Role keywords</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
   );
 }
+
+/* ------------------------------------------------------- How it works */
+
+function HowItWorks() {
+  const steps = [
+    { t: "Choose your level", b: "Fresher, intermediate or professional. It sets the layout and the tone." },
+    { t: "Fill a guided form", b: "Step by step: personal details, experience, education, skills. Drafts save as you go." },
+    { t: "Generate and refine", b: "Get a formatted resume with an ATS score, fix what the tips flag, then export." },
+  ];
+  return (
+    <section id="how" className="scroll-mt-20 mx-auto max-w-6xl px-4 py-24 sm:px-6 md:py-32">
+      <SectionHeader eyebrow="How it works" title="Three steps, about ten minutes" />
+      <ol className="mt-14 grid gap-10 md:grid-cols-3 md:gap-8">
+        {steps.map((s, i) => (
+          <li key={s.t} className="relative border-t-2 border-ink pt-6">
+            <div className="font-display text-5xl font-light text-ink-300">{i + 1}</div>
+            <h3 className="mt-3 text-lg font-semibold">{s.t}</h3>
+            <p className="mt-2 text-[15px] leading-relaxed text-ink-600">{s.b}</p>
+          </li>
+        ))}
+      </ol>
+    </section>
+  );
+}
+
+/* ----------------------------------------------------------- Features */
 
 function Features() {
   return (
-    <section id="features" className="bg-navy/80 backdrop-blur-sm">
-      <div className="mx-auto max-w-6xl px-6 py-20">
-      <SectionHeader eyebrow="Features" title="Everything You Need, Nothing You Don't" />
-      <div className="mt-12 grid gap-5 md:grid-cols-3 md:auto-rows-fr">
-        <BentoCard
-          className="md:col-span-2"
-          icon="🎯"
-          title="ATS Score Checker"
-          body="Real-time score from 0–100, with categorized improvement tips by severity. Know exactly what's blocking your resume from passing automated screens."
-          tag="Critical"
-        />
-        <BentoCard icon="✨" title="AI Bullet Rewriter" body="One-click rewrites with action verbs and quantified impact." />
-        <BentoCard icon="📐" title="Multiple Templates" body="Modern, classic, and executive layouts." />
-        <BentoCard icon="📄" title="PDF + DOCX Export" body="Print-ready PDF and editable DOCX formats." />
-        <BentoCard icon="🔒" title="Privacy First" body="Encrypted at rest. Your data is yours." />
-      </div>
+    <section id="features" className="scroll-mt-20 border-t border-line bg-white">
+      <div className="mx-auto max-w-6xl px-4 py-24 sm:px-6 md:py-32">
+        <SectionHeader eyebrow="Features" title="Everything a serious application needs" />
+        <div className="mt-14 grid gap-5 md:grid-cols-3">
+          <Feature className="md:col-span-2 md:row-span-2" icon={<IconTarget />} title="ATS score and fix list"
+            body="A 0 to 100 score that checks contact details, section structure, quantified bullets and keywords, with each tip labelled by severity so you know what to fix first.">
+            <div className="mt-8 grid gap-2 sm:grid-cols-3" aria-hidden="true">
+              {[["Critical", "Add a phone number", "bg-red-50 text-red-800 border-red-100"], ["Important", "Quantify 3 bullets", "bg-gold-50 text-gold-700 border-gold-50"], ["Nice to have", "Add a GitHub link", "bg-brand-50 text-brand-800 border-brand-100"]].map(([lvl, tip, cls]) => (
+                <div key={lvl} className={`rounded-lg border p-3 text-xs ${cls}`}>
+                  <div className="font-semibold">{lvl}</div>
+                  <div className="mt-0.5 opacity-90">{tip}</div>
+                </div>
+              ))}
+            </div>
+          </Feature>
+          <Feature icon={<IconSpark />} title="Bullet rewriter" body="One-click rewrites with action verbs and measurable results." />
+          <Feature icon={<IconMatch />} title="Job match" body="Paste a job post to see which keywords your resume is missing." />
+          <Feature icon={<IconLetter />} title="Cover letters" body="A first draft from your resume, in the tone you choose." />
+          <Feature icon={<IconFile />} title="PDF, DOCX, TXT" body="Print-ready PDF, editable Word file, and plain text for strict portals." />
+          <Feature icon={<IconLock />} title="Private by default" body="Stored behind row-level security. Export or delete your account any time." />
+        </div>
       </div>
     </section>
   );
 }
 
-function BentoCard({ icon, title, body, tag, className = "" }: { icon: string; title: string; body: string; tag?: string; className?: string }) {
+function Feature({ icon, title, body, className = "", children }: { icon: React.ReactNode; title: string; body: string; className?: string; children?: React.ReactNode }) {
   return (
-    <div className={`glass relative rounded-2xl p-6 transition hover:bg-white/10 ${className}`}>
-      {tag && <div className="absolute right-4 top-4 rounded-full bg-gold/20 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-gold">{tag}</div>}
-      <div className="mb-3 text-3xl">{icon}</div>
-      <h3 className="font-display text-lg font-semibold">{title}</h3>
-      <p className="mt-2 text-sm text-white/70">{body}</p>
+    <div className={`rounded-2xl border border-line bg-paper-50 p-7 transition hover:border-ink-300 ${className}`}>
+      <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-line bg-white text-brand">{icon}</div>
+      <h3 className="mt-5 font-display text-xl font-medium">{title}</h3>
+      <p className="mt-2 text-[15px] leading-relaxed text-ink-600">{body}</p>
+      {children}
     </div>
   );
 }
 
-function Testimonials() {
-  const items = [
-    {
-      name: "Priya Sharma",
-      role: "Software Engineer · Stripe",
-      avatar: "PS",
-      gradient: "from-pink-500 to-orange-500",
-      quote: "Got 3 interviews in my first week using ResumeAI Pro. The ATS score feature alone is worth it.",
-    },
-    {
-      name: "Marcus Chen",
-      role: "Product Manager · Notion",
-      avatar: "MC",
-      gradient: "from-blue-500 to-cyan-500",
-      quote: "I'd been job hunting for 4 months. Switched to this, landed an offer in 3 weeks. The AI rewrites are uncanny.",
-    },
-    {
-      name: "Sarah Williams",
-      role: "VP Engineering · Linear",
-      avatar: "SW",
-      gradient: "from-purple-500 to-pink-500",
-      quote: "The executive summary it generated was better than what my $300/hr resume coach gave me.",
-    },
-  ];
+/* ------------------------------------------------------------ Pricing */
 
+function Pricing() {
   return (
-    <section className="bg-navy/80 backdrop-blur-sm py-20">
-      <div className="mx-auto max-w-6xl px-6">
-        <SectionHeader eyebrow="Testimonials" title="Loved by Job Seekers Worldwide" />
-        <div className="mt-12 grid gap-5 md:grid-cols-3">
-          {items.map((t, i) => (
-            <div key={i} className="glass rounded-2xl p-6">
-              <div className="flex gap-1 text-gold">
-                {"★★★★★".split("").map((s, j) => <span key={j}>{s}</span>)}
-              </div>
-              <p className="mt-3 text-sm text-white/80 leading-relaxed">"{t.quote}"</p>
-              <div className="mt-5 flex items-center gap-3">
-                <div className={`flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br ${t.gradient} text-sm font-bold`}>
-                  {t.avatar}
-                </div>
-                <div>
-                  <div className="text-sm font-semibold">{t.name}</div>
-                  <div className="text-xs text-white/50">{t.role}</div>
-                </div>
-              </div>
-            </div>
+    <section id="pricing" className="scroll-mt-20 mx-auto max-w-6xl px-4 py-24 sm:px-6 md:py-32">
+      <SectionHeader eyebrow="Pricing" title="Pay once, or monthly if you are actively applying" body="Start free. Upgrade only when you need more resumes or features." />
+      <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <PricingCard plan="Free" price="$0" note="forever" features={["1 resume", "Basic template", "PDF export"]} cta="Start free" />
+        <PricingCard plan="Fresher Pack" price="$5" note="one-time" features={["3 resumes", "All templates", "Cover letters"]} badge="For students" cta="Choose Fresher" />
+        <PricingCard plan="Pro Monthly" price="$12" note="per month" features={["Unlimited resumes", "Job matcher", "Priority AI", "All formats"]} badge="Most popular" highlight cta="Go Pro" />
+        <PricingCard plan="Professional" price="$25" note="one-time" features={["5 executive resumes", "Priority AI", "All templates"]} cta="Choose Professional" />
+      </div>
+      <p className="mt-8 text-center text-sm text-ink-500">All plans include a 7-day refund and ATS-friendly output.</p>
+    </section>
+  );
+}
+
+function PricingCard({ plan, price, note, features, badge, highlight, cta }: {
+  plan: string; price: string; note: string; features: string[]; badge?: string; highlight?: boolean; cta: string;
+}) {
+  return (
+    <div className={`relative flex flex-col rounded-2xl p-7 ${highlight ? "bg-ink text-white shadow-sheet" : "border border-line bg-white"}`}>
+      <div className="flex items-center justify-between gap-2">
+        <h3 className="text-sm font-semibold">{plan}</h3>
+        {badge && (
+          <span className={`rounded-full px-2.5 py-0.5 text-[11px] font-semibold ${highlight ? "bg-brand-100 text-brand-800" : "bg-gold-50 text-gold-700"}`}>{badge}</span>
+        )}
+      </div>
+      <div className="mt-5 flex items-baseline gap-1.5">
+        <span className="font-display text-5xl font-medium">{price}</span>
+        <span className={`text-sm ${highlight ? "text-white/70" : "text-ink-500"}`}>{note}</span>
+      </div>
+      <ul className={`mt-6 flex-1 space-y-2.5 border-t pt-6 text-sm ${highlight ? "border-white/15 text-white/85" : "border-line text-ink-700"}`}>
+        {features.map((f) => <li key={f} className="flex items-center gap-2.5"><Tick light={highlight} />{f}</li>)}
+      </ul>
+      <Link href="/signup" className={`mt-8 w-full ${highlight ? "btn-accent" : "btn-ghost"}`}>{cta}</Link>
+    </div>
+  );
+}
+
+/* ---------------------------------------------------------------- FAQ */
+
+function Faq() {
+  const items = [
+    ["Is my data private?", "Resumes are stored in Supabase behind row-level security, so each account can only read its own rows. You can export everything or delete your account from Settings."],
+    ["Will my resume pass applicant tracking systems?", "The output uses a clean single-column structure, standard section headings and real text (not images), which is what ATS parsers handle best. The built-in score flags what to fix, but no tool can guarantee how a specific employer's system behaves."],
+    ["Can I edit what gets generated?", "Yes. You can edit every field, regenerate the resume, or rewrite single bullets."],
+    ["How many resumes can I create?", "One on the free plan. Paid plans give 3, 5 or unlimited. Any resume can be duplicated and tailored to a different role."],
+    ["Which formats can I download?", "PDF for applying, DOCX if you want to keep editing in Word, and plain TXT for portals that reject formatted files."],
+    ["Do you offer refunds?", "Yes, paid plans come with a 7-day refund."],
+  ];
+  return (
+    <section id="faq" className="scroll-mt-20 border-t border-line bg-white">
+      <div className="mx-auto grid max-w-6xl gap-12 px-4 py-24 sm:px-6 md:py-32 lg:grid-cols-[0.8fr_1.2fr]">
+        <div>
+          <div className="eyebrow">FAQ</div>
+          <h2 className="mt-4 font-display text-4xl font-medium leading-tight md:text-5xl">Questions, answered plainly.</h2>
+        </div>
+        <div className="divide-y divide-line border-y border-line">
+          {items.map(([q, a]) => (
+            <details key={q} className="group py-5">
+              <summary className="flex cursor-pointer list-none items-center justify-between gap-6 text-[17px] font-semibold">
+                <span>{q}</span>
+                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-line text-ink-600 transition group-open:rotate-45" aria-hidden="true">
+                  <svg width="12" height="12" viewBox="0 0 12 12"><path d="M6 1v10M1 6h10" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" /></svg>
+                </span>
+              </summary>
+              <p className="mt-3 max-w-xl text-[15px] leading-relaxed text-ink-600">{a}</p>
+            </details>
           ))}
         </div>
       </div>
@@ -315,235 +415,83 @@ function Testimonials() {
   );
 }
 
-function Pricing() {
-  return (
-    <section id="pricing" className="bg-navy/80 backdrop-blur-sm py-20">
-      <div className="mx-auto max-w-6xl px-6">
-        <SectionHeader eyebrow="Pricing" title="Simple, Transparent Pricing" />
-        <p className="mt-3 text-center text-sm text-white/60">No credit card required to start. Upgrade anytime.</p>
-        <div className="mt-12 grid items-end gap-5 md:grid-cols-4">
-          <PricingCard plan="Free" price="$0" features={["1 resume", "Basic template", "PDF export"]} cta="Start free" href="/signup" />
-          <PricingCard plan="Fresher Pack" price="$5" sub="one-time" features={["3 resumes", "All templates", "Cover letters"]} badge="For Students" cta="Buy" href="/signup" />
-          <PricingCard plan="Pro Monthly" price="$12" sub="/ month" features={["Unlimited resumes", "Job matcher", "Priority AI", "All formats"]} badge="Most Popular" highlight cta="Go Pro" href="/signup" />
-          <PricingCard plan="Professional" price="$25" sub="one-time" features={["5 executive resumes", "Priority AI", "All templates"]} cta="Buy" href="/signup" />
-        </div>
-        <p className="mt-8 text-center text-xs text-white/50">All plans include 7-day refund · ATS-optimized output · Secure cloud storage</p>
-      </div>
-    </section>
-  );
-}
-
-function Faq() {
-  return (
-    <section id="faq" className="bg-navy/80 backdrop-blur-sm">
-      <div className="mx-auto max-w-3xl px-6 py-20">
-      <SectionHeader eyebrow="FAQ" title="Frequently Asked Questions" />
-      <div className="mt-10 space-y-3">
-        <FaqItem q="Is my data private and secure?" a="Yes. All data is stored encrypted at rest, behind row-level security in Supabase. We never share or sell your information." />
-        <FaqItem q="Will my resume pass ATS systems?" a="Yes — we generate clean, single-column layouts with standard headers, ATS-friendly fonts, and keyword-rich content. Most users score 80+ on first generation." />
-        <FaqItem q="Can I edit the AI-generated resume?" a="Of course. After generation you can fully edit, regenerate any section, or apply per-bullet AI improvements." />
-        <FaqItem q="How many resumes can I create?" a="Free plan: 1 resume. Paid plans: 3, 5, or unlimited. You can also duplicate any resume to tailor for a different role." />
-        <FaqItem q="What formats can I download?" a="High-quality PDF (print-ready, ATS-friendly), editable DOCX, and plain TXT for systems that reject formatted files." />
-        <FaqItem q="Do you offer refunds?" a="Yes — 7-day no-questions refund on all paid plans." />
-      </div>
-      </div>
-    </section>
-  );
-}
+/* ---------------------------------------------------------- Final CTA */
 
 function FinalCta() {
   return (
-    <section className="bg-gradient-to-br from-brand/40 to-gold/20 bg-fixed py-20">
-      <div className="mx-auto max-w-3xl px-6 text-center">
-        <h2 className="font-display text-4xl font-bold md:text-5xl">Ready to Land Your Dream Job?</h2>
-        <p className="mt-4 text-white/80">No credit card required. Build your first resume in 60 seconds.</p>
-        <Link href="/signup" className="btn-primary mt-8 inline-flex">Start Building Free →</Link>
-        <div className="mt-6 text-xs text-white/50">⭐ 4.9/5 average rating · 12,400+ resumes built this month</div>
+    <section className="mx-auto max-w-6xl px-4 py-24 sm:px-6">
+      <div className="relative overflow-hidden rounded-[28px] bg-brand-800 px-6 py-16 text-center text-white sm:px-12 md:py-20">
+        <div className="rule-lines absolute inset-0 opacity-20" aria-hidden="true" />
+        <div className="relative">
+          <h2 className="mx-auto max-w-2xl font-display text-4xl font-medium leading-tight md:text-5xl">Start with one good resume.</h2>
+          <p className="mx-auto mt-4 max-w-md text-white/80">The free plan is enough to build, score and export your first one.</p>
+          <Link href="/signup" className="mt-9 inline-flex items-center gap-2 rounded-lg bg-white px-6 py-3 text-[15px] font-semibold text-ink shadow-lift transition hover:bg-paper">
+            Build my resume <Arrow />
+          </Link>
+        </div>
       </div>
     </section>
   );
 }
 
+/* ------------------------------------------------------------- Footer */
+
 function Footer() {
   return (
-    <footer className="border-t border-white/10 bg-navy/90 backdrop-blur-sm">
-      <div className="mx-auto max-w-6xl px-6 py-12">
-        <div className="grid gap-8 md:grid-cols-4">
-          <div>
-            <Link href="/" className="flex items-center gap-2 font-display text-lg font-bold">
-              <span className="inline-block h-6 w-6 rounded-md bg-gradient-to-br from-brand to-gold" />
-              ResumeAI <span className="text-gold">Pro</span>
-            </Link>
-            <p className="mt-3 text-xs text-white/50">
-              AI-powered resume builder for every career stage.
-            </p>
-          </div>
-          <FooterCol title="Product" links={[
-            { label: "Features", href: "#features" },
-            { label: "Pricing", href: "#pricing" },
-            { label: "Templates", href: "#features" },
-            { label: "ATS Checker", href: "#features" },
-          ]} />
-          <FooterCol title="Company" links={[
-            { label: "About", href: "#" },
-            { label: "Blog", href: "#" },
-            { label: "Careers", href: "#" },
-            { label: "Contact", href: "#" },
-          ]} />
-          <FooterCol title="Legal" links={[
-            { label: "Privacy", href: "#" },
-            { label: "Terms", href: "#" },
-            { label: "Cookies", href: "#" },
-            { label: "GDPR", href: "#" },
-          ]} />
+    <footer className="border-t border-line">
+      <div className="mx-auto flex max-w-6xl flex-col gap-8 px-4 py-12 sm:px-6 md:flex-row md:items-start md:justify-between">
+        <div className="max-w-sm">
+          <Logo />
+          <p className="mt-3 text-sm text-ink-500">A resume builder for every career stage.</p>
         </div>
-        <div className="mt-10 flex flex-col items-center justify-between gap-3 border-t border-white/10 pt-6 text-xs text-white/50 md:flex-row">
-          <div>© {new Date().getFullYear()} ResumeAI Pro · Built with AI for ambitious careers</div>
-          <div className="flex gap-4">
-            <a href="#" aria-label="Twitter" className="hover:text-white transition">𝕏</a>
-            <a href="#" aria-label="LinkedIn" className="hover:text-white transition">in</a>
-            <a href="#" aria-label="GitHub" className="hover:text-white transition">{"</>"}</a>
-          </div>
+        <nav aria-label="Footer" className="flex flex-wrap gap-x-8 gap-y-3 text-sm text-ink-600">
+          <a href="#how" className="hover:text-ink">How it works</a>
+          <a href="#features" className="hover:text-ink">Features</a>
+          <a href="#pricing" className="hover:text-ink">Pricing</a>
+          <a href="#faq" className="hover:text-ink">FAQ</a>
+          <Link href="/login" className="hover:text-ink">Sign in</Link>
+        </nav>
+      </div>
+      <div className="border-t border-line">
+        <div className="mx-auto max-w-6xl px-4 py-5 text-xs text-ink-500 sm:px-6">
+          &copy; {new Date().getFullYear()} ResumeAI Pro. Portfolio demo: resume content is generated by a built-in mock engine and checkout is simulated, so no real payments are taken.
         </div>
       </div>
     </footer>
   );
 }
 
-function FooterCol({ title, links }: { title: string; links: { label: string; href: string }[] }) {
+/* ------------------------------------------------------------- Shared */
+
+function SectionHeader({ eyebrow, title, body }: { eyebrow: string; title: string; body?: string }) {
   return (
-    <div>
-      <div className="text-xs font-semibold uppercase tracking-widest text-white/70">{title}</div>
-      <ul className="mt-3 space-y-2">
-        {links.map((l) => (
-          <li key={l.label}><a href={l.href} className="text-sm text-white/60 hover:text-white transition">{l.label}</a></li>
-        ))}
-      </ul>
+    <div className="max-w-2xl">
+      <div className="eyebrow">{eyebrow}</div>
+      <h2 className="mt-4 font-display text-4xl font-medium leading-[1.08] md:text-5xl">{title}</h2>
+      {body && <p className="mt-4 text-[17px] leading-relaxed text-ink-600">{body}</p>}
     </div>
   );
 }
 
-function Badge({ children }: { children: React.ReactNode }) {
-  return <span className="rounded-full border border-white/15 bg-white/5 px-3 py-1">{children}</span>;
-}
-
-function SectionHeader({ eyebrow, title }: { eyebrow: string; title: string }) {
+function Arrow() {
   return (
-    <div className="text-center">
-      <div className="text-xs uppercase tracking-widest text-gold">{eyebrow}</div>
-      <h2 className="mt-3 font-display text-3xl font-bold md:text-4xl lg:text-5xl">{title}</h2>
-    </div>
+    <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M2 7h9M7.5 3.5 11 7l-3.5 3.5" stroke="currentColor" strokeWidth="1.6" fill="none" strokeLinecap="round" strokeLinejoin="round" /></svg>
   );
 }
 
-function UserTypeCard({
-  emoji, title, desc, bullets, href, cta, highlight,
-}: { emoji: string; title: string; desc: string; bullets: string[]; href: string; cta: string; highlight?: boolean }) {
+function Tick({ muted, light }: { muted?: boolean; light?: boolean }) {
+  const color = muted ? "#C58A1E" : light ? "#CFE6E0" : "#0F6E5E";
   return (
-    <div className={`glass relative rounded-2xl p-6 transition hover:bg-white/10 hover:-translate-y-1 ${highlight ? "ring-2 ring-brand md:scale-105" : ""}`}>
-      {highlight && (
-        <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-gradient-to-r from-brand to-gold px-3 py-0.5 text-xs font-semibold text-white">
-          Most popular
-        </div>
-      )}
-      <div className="mb-4 text-3xl">{emoji}</div>
-      <h3 className="font-display text-xl font-semibold">{title}</h3>
-      <p className="mt-2 text-sm text-white/70">{desc}</p>
-      <ul className="mt-4 space-y-1.5 text-sm text-white/80">
-        {bullets.map((b) => <li key={b}>· {b}</li>)}
-      </ul>
-      <Link href={href} className="btn-primary mt-6 w-full">{cta}</Link>
-    </div>
+    <svg width="14" height="14" viewBox="0 0 14 14" className="shrink-0" aria-hidden="true">
+      {muted ? <circle cx="7" cy="7" r="5" fill="none" stroke={color} strokeWidth="1.6" /> : <path d="M2.5 7.3 5.5 10l6-6.5" stroke={color} strokeWidth="1.8" fill="none" strokeLinecap="round" strokeLinejoin="round" />}
+    </svg>
   );
 }
 
-function Step({ n, title, body }: { n: number; title: string; body: string }) {
-  return (
-    <div className="glass rounded-2xl p-6">
-      <div className="mb-3 inline-flex h-8 w-8 items-center justify-center rounded-full bg-brand text-sm font-bold">{n}</div>
-      <h3 className="font-display text-lg font-semibold">{title}</h3>
-      <p className="mt-1 text-sm text-white/70">{body}</p>
-    </div>
-  );
-}
-
-function PricingCard({
-  plan, price, sub, features, badge, highlight, cta, href,
-}: { plan: string; price: string; sub?: string; features: string[]; badge?: string; highlight?: boolean; cta: string; href: string }) {
-  return (
-    <div className={`relative rounded-2xl border p-6 transition ${highlight ? "border-brand bg-gradient-to-br from-brand/20 to-brand/5 shadow-2xl shadow-brand/20 md:scale-110 md:py-8" : "border-white/10 bg-white/[0.03] hover:border-white/30"}`}>
-      {badge && (
-        <div className={`absolute -top-3 left-1/2 -translate-x-1/2 rounded-full px-3 py-0.5 text-xs font-semibold ${highlight ? "bg-gradient-to-r from-brand to-gold text-white" : "bg-gold text-navy"}`}>{badge}</div>
-      )}
-      <div className="font-display text-lg font-semibold">{plan}</div>
-      <div className="mt-2 flex items-baseline gap-1">
-        <span className="text-3xl font-bold">{price}</span>
-        {sub && <span className="text-sm text-white/60">{sub}</span>}
-      </div>
-      <ul className="mt-5 space-y-2 text-sm text-white/80">
-        {features.map((f) => <li key={f} className="flex gap-2"><span className="text-green-400">✓</span> {f}</li>)}
-      </ul>
-      <Link href={href} className={`mt-6 block w-full ${highlight ? "btn-primary" : "btn-ghost"}`}>{cta}</Link>
-    </div>
-  );
-}
-
-function FaqItem({ q, a }: { q: string; a: string }) {
-  return (
-    <details className="group glass rounded-xl px-5 py-4 transition open:bg-white/[0.08]">
-      <summary className="flex cursor-pointer list-none items-center justify-between font-medium">
-        <span>{q}</span>
-        <span className="ml-4 inline-block h-5 w-5 shrink-0 transition group-open:rotate-180">
-          <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-            <path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.06l3.71-3.83a.75.75 0 111.08 1.04l-4.25 4.39a.75.75 0 01-1.08 0L5.21 8.27a.75.75 0 01.02-1.06z" clipRule="evenodd" />
-          </svg>
-        </span>
-      </summary>
-      <p className="mt-3 text-sm text-white/70 leading-relaxed">{a}</p>
-    </details>
-  );
-}
-
-function MockResumePreview() {
-  return (
-    <div className="fade-in relative">
-      <div className="absolute -inset-4 rounded-3xl bg-gradient-to-br from-brand/30 to-gold/20 blur-2xl" />
-      <div className="relative rounded-2xl bg-white p-6 text-slate-800 shadow-2xl">
-        <div className="flex items-center justify-between border-b pb-3">
-          <div>
-            <div className="font-display text-lg font-bold">Alex Morgan</div>
-            <div className="text-xs text-slate-500">Software Engineer</div>
-          </div>
-          <div className="text-right text-xs text-slate-500">
-            <div>alex@example.com</div>
-            <div>San Francisco, CA</div>
-          </div>
-        </div>
-        <div className="mt-3 text-[11px] uppercase tracking-widest text-brand">Summary</div>
-        <p className="mt-1 text-xs text-slate-700">
-          Results-focused software engineer with 4+ years shipping production-grade systems. Proven record of translating ambiguous requirements into reliable platforms.
-        </p>
-        <div className="mt-3 text-[11px] uppercase tracking-widest text-brand">Experience</div>
-        <div className="mt-1 text-xs">
-          <div className="font-semibold">Senior Engineer · Acme Corp</div>
-          <div className="text-slate-500">2021 – Present</div>
-          <ul className="mt-1 list-disc pl-4 text-slate-700">
-            <li>Led migration to Kubernetes, improving uptime to 99.9%.</li>
-            <li>Reduced API latency by 42% across 5 services.</li>
-          </ul>
-        </div>
-        <div className="mt-3 text-[11px] uppercase tracking-widest text-brand">Skills</div>
-        <div className="mt-1 flex flex-wrap gap-1 text-[11px]">
-          {["TypeScript", "React", "Next.js", "PostgreSQL", "AWS"].map((s) => (
-            <span key={s} className="rounded bg-slate-100 px-2 py-0.5 text-slate-700">{s}</span>
-          ))}
-        </div>
-      </div>
-      {/* Floating ATS badge */}
-      <div className="absolute -right-4 -top-4 rounded-2xl bg-gradient-to-br from-green-400 to-emerald-600 p-3 shadow-xl float-up">
-        <div className="text-[10px] font-semibold uppercase tracking-widest text-white/90">ATS Score</div>
-        <div className="font-display text-2xl font-bold text-white">94</div>
-      </div>
-    </div>
-  );
-}
+const ic = { width: 20, height: 20, viewBox: "0 0 20 20", fill: "none", stroke: "currentColor", strokeWidth: 1.6, strokeLinecap: "round" as const, strokeLinejoin: "round" as const, "aria-hidden": true };
+function IconTarget() { return <svg {...ic}><circle cx="10" cy="10" r="7" /><circle cx="10" cy="10" r="3.5" /><circle cx="10" cy="10" r="0.6" fill="currentColor" /></svg>; }
+function IconSpark() { return <svg {...ic}><path d="M10 2.5v4M10 13.5v4M2.5 10h4M13.5 10h4M5 5l2 2M13 13l2 2M15 5l-2 2M7 13l-2 2" /></svg>; }
+function IconMatch() { return <svg {...ic}><rect x="2.5" y="4" width="8" height="12" rx="1.5" /><rect x="9.5" y="4" width="8" height="12" rx="1.5" /></svg>; }
+function IconLetter() { return <svg {...ic}><rect x="2.5" y="4.5" width="15" height="11" rx="1.5" /><path d="m3 5.5 7 5.5 7-5.5" /></svg>; }
+function IconFile() { return <svg {...ic}><path d="M5 2.5h6.5L15 6v11a.5.5 0 0 1-.5.5h-9.5A.5.5 0 0 1 4.5 17V3a.5.5 0 0 1 .5-.5Z" /><path d="M11 2.5V6.5h4M7.5 11h5M7.5 14h5" /></svg>; }
+function IconLock() { return <svg {...ic}><rect x="4" y="9" width="12" height="8.5" rx="1.5" /><path d="M6.5 9V6.5a3.5 3.5 0 0 1 7 0V9" /></svg>; }

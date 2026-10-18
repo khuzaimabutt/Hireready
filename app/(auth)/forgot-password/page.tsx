@@ -30,10 +30,10 @@ export default function ForgotPasswordPage() {
 
   return (
     <div className="w-full">
-      <Link href="/login" className="mb-6 inline-flex items-center gap-2 text-sm text-white/70 hover:text-white transition">← Back to sign in</Link>
-      <div className="glass rounded-2xl p-8">
-        <h1 className="font-display text-2xl font-bold">Reset your password</h1>
-        <p className="mt-1 text-sm text-white/60">Enter your email and we'll send you a link.</p>
+      <Link href="/login" className="mb-6 inline-flex items-center gap-2 text-sm font-medium text-ink-600 transition hover:text-ink">← Back to sign in</Link>
+      <div className="rounded-2xl border border-line bg-white p-6 shadow-lift sm:p-8">
+        <h1 className="font-display text-[32px] font-medium leading-tight">Reset your password</h1>
+        <p className="mt-1 text-sm text-ink-600">Enter your email and we'll send you a link.</p>
 
         {sent ? (
           <div className="mt-6 rounded-md border border-green-400/30 bg-green-500/10 px-4 py-3 text-sm text-green-200">
@@ -42,7 +42,7 @@ export default function ForgotPasswordPage() {
         ) : (
           <form onSubmit={onSubmit} className="mt-6 space-y-4">
             <div>
-              <label className="mb-1 block text-xs font-medium uppercase tracking-wider text-white/70">Email</label>
+              <label className="label">Email</label>
               <input type="email" className="input text-ink" required value={email} onChange={(e) => setEmail(e.target.value)} />
             </div>
             <button className="btn-primary w-full" type="submit" disabled={loading}>
@@ -51,7 +51,7 @@ export default function ForgotPasswordPage() {
           </form>
         )}
 
-        <div className="mt-6 text-center text-sm text-white/60">
+        <div className="mt-6 text-center text-sm text-ink-600">
           Remembered? <Link href="/login" className="text-brand hover:underline">Sign in</Link>
         </div>
       </div>

@@ -32,7 +32,7 @@ export default function OAuthButtons({ next = "/dashboard" }: { next?: string })
         type="button"
         onClick={() => signInWith("google")}
         disabled={loading !== null}
-        className="flex w-full items-center justify-center gap-3 rounded-lg border border-white/15 bg-white/5 px-4 py-2.5 text-sm font-medium text-white transition hover:bg-white/10 active:scale-[0.99] disabled:opacity-50"
+        className="flex w-full items-center justify-center gap-3 rounded-lg border border-line bg-white px-4 py-2.5 text-sm font-semibold text-ink transition hover:border-ink-300 hover:bg-paper-50 active:scale-[0.99] disabled:opacity-50"
       >
         <GoogleIcon />
         {loading === "google" ? "Connecting..." : "Continue with Google"}
@@ -41,7 +41,7 @@ export default function OAuthButtons({ next = "/dashboard" }: { next?: string })
         type="button"
         onClick={() => signInWith("linkedin_oidc")}
         disabled={loading !== null}
-        className="flex w-full items-center justify-center gap-3 rounded-lg border border-white/15 bg-white/5 px-4 py-2.5 text-sm font-medium text-white transition hover:bg-white/10 active:scale-[0.99] disabled:opacity-50"
+        className="flex w-full items-center justify-center gap-3 rounded-lg border border-line bg-white px-4 py-2.5 text-sm font-semibold text-ink transition hover:border-ink-300 hover:bg-paper-50 active:scale-[0.99] disabled:opacity-50"
       >
         <LinkedInIcon />
         {loading === "linkedin" ? "Connecting..." : "Continue with LinkedIn"}

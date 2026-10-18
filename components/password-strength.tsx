@@ -22,11 +22,11 @@ export default function PasswordStrength({ password }: { password: string }) {
         {[0, 1, 2, 3].map((i) => (
           <div
             key={i}
-            className={`h-1 flex-1 rounded-full transition ${i < score ? color : "bg-white/10"}`}
+            className={`h-1 flex-1 rounded-full transition ${i < score ? color : "bg-line"}`}
           />
         ))}
       </div>
-      <div className="text-[11px] text-white/60">
+      <div className="text-[11px] text-ink-600">
         Strength: <span className="font-medium">{label}</span>
       </div>
     </div>
