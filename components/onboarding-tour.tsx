@@ -6,19 +6,19 @@ const STORAGE_KEY = "ra:onboarding-v1";
 
 const STEPS = [
   {
-    title: "Welcome to ResumeAI Pro 👋",
-    body: "Let's get you set up. We tailor everything to your career stage — fresher, intermediate, or senior.",
+    title: "Welcome to ResumeAI Pro",
+    body: "Let's get you set up. We tailor everything to your career stage, fresher, intermediate, or senior.",
   },
   {
-    title: "Step 1 — Create a resume",
+    title: "Step 1: Create a resume",
     body: "Click + New Resume. We'll create a draft tailored to your career stage so you can start filling.",
   },
   {
-    title: "Step 2 — Use the ✨ AI Improver",
-    body: "Inside the builder, click the ✨ button next to any bullet point — we'll rewrite it with action verbs and metrics.",
+    title: "Step 2: Use the AI Improver",
+    body: "Inside the builder, use the Improve with AI button under any bullet point and we'll rewrite it with action verbs and metrics.",
   },
   {
-    title: "Step 3 — Generate & Download",
+    title: "Step 3: Generate & Download",
     body: "Hit Generate to get an ATS-scored resume. Try the 4 templates, then download as PDF, DOCX, or plain text.",
   },
 ];
@@ -44,8 +44,8 @@ export default function OnboardingTour({ shouldShow }: { shouldShow: boolean }) 
   const last = step === STEPS.length - 1;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/40 p-4 backdrop-blur-sm">
-      <div className="w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl float-up">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-ink/40 p-4 backdrop-blur-sm">
+      <div key={step} className="w-full max-w-md rounded-2xl border border-line bg-white p-6 shadow-sheet float-up">
         <div className="mb-4 flex items-center gap-1.5">
           {STEPS.map((_, i) => (
             <div key={i} className={`h-1 flex-1 rounded-full ${i <= step ? "bg-brand" : "bg-paper-300"}`} />

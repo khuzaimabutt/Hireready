@@ -25,7 +25,7 @@ export default function CoverLetter({ resumeId, defaultRole }: { resumeId: strin
       const data = await res.json();
       if (!res.ok) throw new Error(data.error ?? "Could not generate");
       setText(data.text);
-      toast.success("Cover letter ready ✨");
+      toast.success("Cover letter ready");
     } catch (e: any) {
       toast.error(e.message);
     } finally {
@@ -55,7 +55,7 @@ export default function CoverLetter({ resumeId, defaultRole }: { resumeId: strin
           <p className="text-xs text-ink-500">AI-generate a tailored letter for this resume.</p>
         </div>
         <button onClick={() => setOpen((v) => !v)} className="btn-secondary">
-          {open ? "Hide" : "✨ Generate"}
+          {open ? "Hide" : "Generate"}
         </button>
       </div>
 

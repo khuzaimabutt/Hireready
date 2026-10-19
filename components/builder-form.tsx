@@ -20,6 +20,13 @@ type Tab = typeof TABS[number];
 export default function BuilderForm({ resume, profile }: { resume: Resume; profile: Profile }) {
   const router = useRouter();
   const [tab, setTab] = useState<Tab>("Basics");
+  const [dir, setDir] = useState<"next" | "prev">("next");
+  const tabIdx = TABS.indexOf(tab);
+  function goTab(t: Tab) {
+    if (t === tab) return;
+    setDir(TABS.indexOf(t) > tabIdx ? "next" : "prev");
+    setTab(t);
+  }
   const [title, setTitle] = useState(resume.title);
   const [targetRole, setTargetRole] = useState(resume.target_role ?? "");
   const [userType, setUserType] = useState<UserType>(resume.user_type);
@@ -59,7 +66,7 @@ export default function BuilderForm({ resume, profile }: { resume: Resume; profi
   async function generate() {
     if (!targetRole) {
       toast.error("Please enter a target role first.");
-      setTab("Basics");
+      setDir("prev"); setTab("Basics");
       return;
     }
     if (profile.credits_remaining <= 0) {
@@ -99,8 +106,8 @@ export default function BuilderForm({ resume, profile }: { resume: Resume; profi
   if (generating) {
     const steps = ["Reading", "Rewriting", "Optimizing", "Polishing", "Finishing"];
     return (
-      <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/40 backdrop-blur-sm">
-        <div className="w-full max-w-md rounded-2xl bg-white p-8 text-center shadow-2xl float-up">
+      <div className="fixed inset-0 z-50 flex items-center justify-center bg-ink/40 backdrop-blur-sm">
+        <div className="w-full max-w-md rounded-2xl border border-line bg-white p-8 text-center shadow-sheet float-up">
           <div className="mx-auto mb-6 inline-block h-14 w-14 animate-spin rounded-full border-4 border-brand/20 border-t-brand" />
           <h2 className="font-display text-xl font-bold">Generating your resume</h2>
           <p className="mt-2 text-sm text-ink-600">{genMessage}</p>
@@ -157,22 +164,50 @@ export default function BuilderForm({ resume, profile }: { resume: Resume; profi
           </div>
         </div>
 
-        {/* Tabs */}
+        {/* Steps */}
         <div className="card">
-          <div className="mb-4 flex flex-wrap gap-1 rounded-lg bg-paper-200 p-1">
-            {TABS.map((t) => (
-              <button key={t} onClick={() => setTab(t)}
-                className={`flex-1 rounded-md px-3 py-1.5 text-sm font-medium transition ${tab === t ? "bg-white text-brand shadow-sm" : "text-ink-600 hover:text-ink"}`}>
+          <div className="relative mb-5 grid grid-cols-5 rounded-xl bg-paper-200 p-1" role="tablist" aria-label="Resume sections">
+            {/* sliding highlight: transform only */}
+            <span
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-y-1 left-1 w-[calc((100%-0.5rem)/5)] rounded-lg bg-white shadow-paper transition-transform duration-[360ms] ease-out"
+              style={{ transform: `translateX(${tabIdx * 100}%)` }}
+            />
+            {TABS.map((t, i) => (
+              <button
+                key={t}
+                role="tab"
+                aria-selected={tab === t}
+                onClick={() => goTab(t)}
+                className={`relative z-10 flex flex-col items-center gap-0.5 rounded-lg px-0.5 py-2 text-[11px] font-semibold transition-colors duration-150 sm:flex-row sm:justify-center sm:gap-2 sm:px-3 sm:text-sm ${tab === t ? "text-brand" : "text-ink-600 hover:text-ink"}`}
+              >
+                <span className={`flex h-5 w-5 items-center justify-center rounded-full text-[10px] font-bold transition-colors duration-150 ${tab === t ? "bg-brand text-white" : i < tabIdx ? "bg-brand-100 text-brand-700" : "bg-paper-300 text-ink-600"}`}>
+                  {i < tabIdx ? "✓" : i + 1}
+                </span>
                 {t}
               </button>
             ))}
           </div>
 
-          {tab === "Basics" && <BasicsTab content={content} setContent={setContent} userType={userType} />}
-          {tab === "Experience" && <ExperienceTab content={content} setContent={setContent} userType={userType} targetRole={targetRole} />}
-          {tab === "Education" && <EducationTab content={content} setContent={setContent} />}
-          {tab === "Skills" && <SkillsTab content={content} setContent={setContent} />}
-          {tab === "Extras" && <ExtrasTab content={content} setContent={setContent} />}
+          <div className="-mx-1 overflow-x-clip px-1">
+            <div key={tab} className={dir === "next" ? "step-next" : "step-prev"} role="tabpanel">
+              {tab === "Basics" && <BasicsTab content={content} setContent={setContent} userType={userType} />}
+              {tab === "Experience" && <ExperienceTab content={content} setContent={setContent} userType={userType} targetRole={targetRole} />}
+              {tab === "Education" && <EducationTab content={content} setContent={setContent} />}
+              {tab === "Skills" && <SkillsTab content={content} setContent={setContent} />}
+              {tab === "Extras" && <ExtrasTab content={content} setContent={setContent} />}
+            </div>
+          </div>
+
+          <div className="mt-6 flex items-center justify-between border-t border-line pt-4">
+            <button type="button" className="btn-secondary" onClick={() => goTab(TABS[Math.max(0, tabIdx - 1)])} disabled={tabIdx === 0}>
+              Back
+            </button>
+            <span className="text-xs text-ink-500">Step {tabIdx + 1} of {TABS.length}</span>
+            <button type="button" className="btn-accent !py-2" onClick={() => goTab(TABS[Math.min(TABS.length - 1, tabIdx + 1)])} disabled={tabIdx === TABS.length - 1}>
+              Next
+            </button>
+          </div>
         </div>
 
         {/* Generate */}
@@ -206,8 +241,8 @@ export default function BuilderForm({ resume, profile }: { resume: Resume; profi
 }
 
 function SaveStatus({ state }: { state: "idle" | "saving" | "saved" }) {
-  if (state === "saving") return <span className="inline-flex items-center gap-1.5 text-amber-600"><Dot color="bg-amber-500 pulse-soft" /> Saving…</span>;
-  if (state === "saved") return <span className="inline-flex items-center gap-1.5 text-green-600"><Dot color="bg-green-500" /> Saved</span>;
+  if (state === "saving") return <span className="inline-flex items-center gap-1.5 text-gold"><Dot color="bg-gold pulse-soft" /> Saving…</span>;
+  if (state === "saved") return <span className="inline-flex items-center gap-1.5 text-brand"><Dot color="bg-brand" /> Saved</span>;
   return <span className="inline-flex items-center gap-1.5 text-ink-500"><Dot color="bg-ink-300" /> Idle</span>;
 }
 function Dot({ color }: { color: string }) {
@@ -287,8 +322,8 @@ function ProjectsEditor({ content, setContent, userType, targetRole }: { content
 
   return (
     <div className="space-y-4">
-      <div className="rounded-md bg-blue-50 px-3 py-2 text-sm text-blue-900">
-        💡 Your projects ARE your experience. Add every significant one — most-relevant first.
+      <div className="rounded-md bg-paper-100 px-3 py-2 text-sm text-ink-700">
+        Your projects ARE your experience. Add every significant one, most-relevant first.
       </div>
       {projects.map((p, i) => (
         <div key={i} className="rounded-lg border border-line p-4">
@@ -331,7 +366,7 @@ function ItemHeader({ idx, total, onMoveUp, onMoveDown, onRemove }: { idx: numbe
         <button type="button" disabled={idx === total - 1} onClick={onMoveDown} className="rounded p-1 text-ink-500 hover:bg-paper-200 disabled:opacity-30" title="Move down" aria-label="Move down">
           <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 16l-6-6 1.41-1.41L10 13.17l4.59-4.58L16 10z"/></svg>
         </button>
-        <button type="button" onClick={onRemove} className="ml-2 text-xs text-red-500 hover:underline">Remove</button>
+        <button type="button" onClick={onRemove} className="ml-2 text-xs text-rust hover:underline">Remove</button>
       </div>
     </div>
   );
@@ -416,7 +451,7 @@ function ExtrasTab({ content, setContent }: { content: ResumeContent; setContent
             <input className="input" placeholder="Provider" value={c.provider ?? ""} onChange={(e) => { const n = [...certs]; n[i] = { ...c, provider: e.target.value }; updateCerts(n); }} />
             <div className="flex gap-2">
               <input className="input" placeholder="Year" value={c.year ?? ""} onChange={(e) => { const n = [...certs]; n[i] = { ...c, year: e.target.value }; updateCerts(n); }} />
-              <button className="text-sm text-red-500" onClick={() => updateCerts(certs.filter((_, j) => j !== i))}>×</button>
+              <button className="text-sm text-rust" onClick={() => updateCerts(certs.filter((_, j) => j !== i))}>×</button>
             </div>
           </div>
         ))}
@@ -489,7 +524,7 @@ function BulletEditor({
       const next = [...value];
       next[idx] = data.recommended;
       onChange(next);
-      toast.success("Improved with AI ✨");
+      toast.success("Improved with AI");
     } catch (e: any) {
       toast.error(e.message);
     } finally {
@@ -503,7 +538,7 @@ function BulletEditor({
       <div className="space-y-2">
         {value.map((b, i) => {
           const len = b.length;
-          const lenColor = len > 200 ? "text-red-500" : len > 150 ? "text-amber-500" : len > 60 ? "text-green-600" : "text-ink-500";
+          const lenColor = len > 200 ? "text-rust" : len > 150 ? "text-gold" : len > 60 ? "text-brand" : "text-ink-500";
           return (
             <div key={i} className="rounded-lg border border-line bg-white">
               <textarea
@@ -518,13 +553,13 @@ function BulletEditor({
                   type="button"
                   onClick={() => rewrite(i)}
                   disabled={busyIdx === i}
-                  className="inline-flex items-center gap-1 rounded-md bg-gradient-to-r from-brand to-brand/80 px-2 py-1 text-[11px] font-medium text-white shadow-sm transition hover:opacity-90 disabled:opacity-50"
+                  className="inline-flex items-center gap-1 rounded-md bg-brand px-2 py-1 text-[11px] font-medium text-white shadow-sm transition hover:bg-brand-700 disabled:opacity-50"
                 >
-                  {busyIdx === i ? "✨ Improving…" : "✨ Improve with AI"}
+                  {busyIdx === i ? "Improving…" : "Improve with AI"}
                 </button>
                 <div className="flex items-center gap-3">
                   <span className={`text-[11px] ${lenColor}`}>{len} chars{len > 200 ? " · too long" : len < 60 ? " · short" : ""}</span>
-                  <button type="button" onClick={() => onChange(value.filter((_, j) => j !== i))} className="text-xs text-red-500 hover:underline">Remove</button>
+                  <button type="button" onClick={() => onChange(value.filter((_, j) => j !== i))} className="text-xs text-rust hover:underline">Remove</button>
                 </div>
               </div>
             </div>

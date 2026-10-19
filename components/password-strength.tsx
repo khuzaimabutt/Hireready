@@ -9,7 +9,7 @@ export function passwordScore(p: string): { score: number; label: string; color:
   if (/[^A-Za-z0-9]/.test(p)) s++;
   s = Math.min(s, 4);
   const labels = ["Too short", "Weak", "Fair", "Good", "Strong"];
-  const colors = ["bg-red-500", "bg-red-400", "bg-yellow-400", "bg-blue-400", "bg-green-500"];
+  const colors = ["bg-rust", "bg-rust/70", "bg-gold", "bg-brand/70", "bg-brand"];
   return { score: s, label: labels[s], color: colors[s] };
 }
 
