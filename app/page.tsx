@@ -342,7 +342,7 @@ function Pricing() {
         <PricingCard plan="Pro Monthly" price="$12" note="per month" features={["Unlimited resumes", "Job matcher", "Priority AI", "All formats"]} badge="Most popular" highlight cta="Go Pro" />
         <PricingCard plan="Professional" price="$25" note="one-time" features={["5 executive resumes", "Priority AI", "All templates"]} cta="Choose Professional" />
       </div>
-      <p className="mt-8 text-center text-sm text-ink-500">All plans include a 7-day refund and ATS-friendly output.</p>
+      <p className="mt-8 text-center text-sm text-ink-500">All plans include ATS-friendly output.</p>
     </section>
   );
 }
@@ -379,8 +379,7 @@ function Faq() {
     ["Can I edit what gets generated?", "Yes. You can edit every field, regenerate the resume, or rewrite single bullets."],
     ["How many resumes can I create?", "One on the free plan. Paid plans give 3, 5 or unlimited. Any resume can be duplicated and tailored to a different role."],
     ["Which formats can I download?", "PDF for applying, DOCX if you want to keep editing in Word, and plain TXT for portals that reject formatted files."],
-    ["Do you offer refunds?", "Yes, paid plans come with a 7-day refund."],
-  ];
+      ];
   return (
     <section id="faq" className="scroll-mt-20 border-t border-line bg-white">
       <div className="mx-auto grid max-w-6xl gap-12 px-4 py-24 sm:px-6 md:py-32 lg:grid-cols-[0.8fr_1.2fr]">
