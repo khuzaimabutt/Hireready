@@ -68,22 +68,22 @@ export default function ResumeCard({ resume, onChange }: { resume: Resume; onCha
   }
 
   return (
-    <div className={`card relative card-hover ${busy ? "opacity-60" : ""}`}>
+    <div className={`card card-hover relative ${busy ? "opacity-60" : ""}`}>
       <Link href={`/preview/${resume.id}`} className="block">
-        <div className="mb-2 flex items-center justify-between gap-2">
-          <span className="rounded-full bg-paper-200 px-2 py-0.5 text-xs capitalize text-ink-700">{resume.user_type}</span>
+        <div className="mb-2 flex items-center justify-between gap-2 pr-8">
+          <span className="rounded-full bg-paper-200 px-2.5 py-0.5 text-xs font-medium capitalize text-ink-700">{resume.user_type}</span>
           <span className={`rounded-full border px-2 py-0.5 text-xs ${
-            resume.status === "generated" ? "border-green-200 bg-green-50 text-green-700" :
+            resume.status === "generated" ? "border-brand-100 bg-brand-50 text-brand-700" :
             resume.status === "draft" ? "border-line bg-paper-50 text-ink-600" :
-            resume.status === "generating" ? "border-blue-200 bg-blue-50 text-blue-700" :
-            "border-red-200 bg-red-50 text-red-700"
+            resume.status === "generating" ? "border-gold/40 bg-gold-50 text-gold-700" :
+            "border-rust-200 bg-rust-50 text-rust"
           }`}>{resume.status}</span>
         </div>
 
         {/* mini paper preview */}
-        <div className="mb-3 aspect-[8.5/11] rounded-md border border-line bg-white p-3 shadow-inner overflow-hidden">
+        <div className="mb-3 aspect-[8.5/11] overflow-hidden rounded-md border border-line bg-white p-3">
           <div className="space-y-1.5">
-            <div className="h-2 w-3/5 rounded bg-slate-800/80" />
+            <div className="h-2 w-3/5 rounded bg-ink/80" />
             <div className="h-1.5 w-2/5 rounded bg-brand/70" />
             <div className="mt-2 h-px w-full bg-paper-300" />
             <div className="mt-2 h-1.5 w-1/4 rounded bg-brand/40" />
@@ -101,7 +101,7 @@ export default function ResumeCard({ resume, onChange }: { resume: Resume; onCha
         </div>
 
         <h3 className="font-display text-lg font-semibold leading-tight line-clamp-1">{resume.title}</h3>
-        <p className="text-sm text-ink-500 line-clamp-1">{resume.target_role || "—"}</p>
+        <p className="text-sm text-ink-500 line-clamp-1">{resume.target_role || "-"}</p>
         <div className="mt-4 flex items-center justify-between">
           {resume.ats_score != null ? (
             <span className={`rounded-md border px-2 py-0.5 text-xs font-medium ${scoreColor(resume.ats_score)}`}>
@@ -116,19 +116,19 @@ export default function ResumeCard({ resume, onChange }: { resume: Resume; onCha
       <div ref={menuRef} className="absolute right-3 top-3">
         <button
           onClick={(e) => { e.preventDefault(); setMenuOpen((v) => !v); }}
-          className="rounded-md p-1.5 text-ink-500 hover:bg-paper-200 hover:text-ink-700"
+          className="rounded-md p-2 text-ink-500 transition-colors duration-150 hover:bg-paper-200 hover:text-ink-700"
           aria-label="More actions"
         >
           <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor"><path d="M10 6a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Zm0 5.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Zm0 5.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Z"/></svg>
         </button>
         {menuOpen && (
-          <div className="absolute right-0 top-9 z-10 w-44 rounded-lg border border-line bg-white p-1 shadow-lg">
-            <MenuItem onClick={() => { setMenuOpen(false); router.push(`/builder/${resume.id}`); }}>✎ Edit</MenuItem>
-            <MenuItem onClick={rename}>✎ Rename</MenuItem>
-            <MenuItem onClick={duplicate}>⎘ Duplicate</MenuItem>
-            {resume.status === "generated" && <MenuItem onClick={downloadPdf}>↓ Download PDF</MenuItem>}
+          <div className="pop-in absolute right-0 top-9 z-10 w-44 rounded-lg border border-line bg-white p-1 shadow-lift">
+            <MenuItem onClick={() => { setMenuOpen(false); router.push(`/builder/${resume.id}`); }}>Edit</MenuItem>
+            <MenuItem onClick={rename}>Rename</MenuItem>
+            <MenuItem onClick={duplicate}>Duplicate</MenuItem>
+            {resume.status === "generated" && <MenuItem onClick={downloadPdf}>Download PDF</MenuItem>}
             <div className="my-1 h-px bg-paper-200" />
-            <MenuItem onClick={remove} danger>🗑 Delete</MenuItem>
+            <MenuItem onClick={remove} danger>Delete</MenuItem>
           </div>
         )}
       </div>
@@ -140,7 +140,7 @@ function MenuItem({ children, onClick, danger }: { children: React.ReactNode; on
   return (
     <button
       onClick={onClick}
-      className={`flex w-full items-center rounded px-3 py-1.5 text-left text-sm transition ${danger ? "text-red-600 hover:bg-red-50" : "text-ink-700 hover:bg-paper-100"}`}
+      className={`flex w-full items-center rounded px-3 py-1.5 text-left text-sm transition ${danger ? "text-rust hover:bg-rust-50" : "text-ink-700 hover:bg-paper-100"}`}
     >
       {children}
     </button>

@@ -17,7 +17,12 @@ export default async function AppLayout({ children }: { children: React.ReactNod
   return (
     <div className="min-h-screen bg-soft text-ink">
       <AppNav profile={profile} email={user.email ?? ""} />
-      <main className="mx-auto max-w-6xl px-6 py-8">{children}</main>
+      <main className="mx-auto max-w-6xl px-4 py-8 sm:px-6">{children}</main>
+      <footer className="mx-auto max-w-6xl px-4 pb-10 sm:px-6">
+        <p className="border-t border-line pt-4 text-xs leading-relaxed text-ink-500">
+          Portfolio demo. Resume content comes from a built-in mock engine, not a live OpenAI model, and checkout is simulated, so no real payments are taken.
+        </p>
+      </footer>
     </div>
   );
 }

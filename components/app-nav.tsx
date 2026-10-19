@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useRef, useEffect } from "react";
 import SignOutButton from "@/components/sign-out-button";
+import { LogoMark } from "@/components/logo";
 
 type Profile = {
   full_name?: string | null;
@@ -42,9 +43,9 @@ export default function AppNav({ profile, email }: { profile: Profile | null; em
     <header className="sticky top-0 z-30 border-b border-line bg-white/85 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-3">
         <div className="flex items-center gap-8">
-          <Link href="/dashboard" className="flex items-center gap-2 font-display text-lg font-bold">
-            <span className="inline-block h-7 w-7 rounded-md bg-gradient-to-br from-brand to-gold" />
-            ResumeAI <span className="text-gold">Pro</span>
+          <Link href="/dashboard" className="flex items-center gap-2.5 font-display text-[19px] font-semibold tracking-tight">
+            <LogoMark />
+            <span>ResumeAI <span className="text-brand">Pro</span></span>
           </Link>
           <nav className="hidden gap-1 md:flex">
             {links.map((l) => {
@@ -53,7 +54,8 @@ export default function AppNav({ profile, email }: { profile: Profile | null; em
                 <Link
                   key={l.href}
                   href={l.href}
-                  className={`rounded-md px-3 py-1.5 text-sm transition ${active ? "bg-brand/10 font-semibold text-brand" : "text-ink-600 hover:bg-paper-200 hover:text-ink"}`}
+                  aria-current={active ? "page" : undefined}
+                  className={`rounded-lg px-3 py-1.5 text-sm transition-colors duration-150 ${active ? "bg-paper-200 font-semibold text-ink" : "text-ink-600 hover:bg-paper-200 hover:text-ink"}`}
                 >
                   {l.label}
                 </Link>
@@ -68,22 +70,22 @@ export default function AppNav({ profile, email }: { profile: Profile | null; em
             className="rounded-full border border-line bg-paper-50 px-3 py-1 text-xs font-medium text-ink-700 transition hover:border-brand/40 hover:bg-brand/5"
             title="Click to add more credits"
           >
-            ⚡ {credits} credits
+            {credits} {credits === 1 ? "credit" : "credits"}
           </Link>
-          <span className={`rounded-full px-3 py-1 text-xs font-medium capitalize ${plan === "free" ? "bg-paper-200 text-ink-700" : "bg-gradient-to-r from-brand/10 to-gold/10 text-brand"}`}>
+          <span className={`rounded-full px-3 py-1 text-xs font-medium capitalize ${plan === "free" ? "bg-paper-200 text-ink-700" : "bg-brand-50 text-brand-700"}`}>
             {plan === "free" ? "Free plan" : plan}
           </span>
 
           <div ref={ref} className="relative">
             <button
               onClick={() => setMenuOpen((v) => !v)}
-              className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-brand to-gold text-xs font-bold text-white shadow-sm transition hover:scale-105"
+              className="flex h-9 w-9 items-center justify-center rounded-full bg-ink text-xs font-bold text-paper transition-transform duration-150 hover:scale-105 active:scale-95"
               aria-label="Account menu"
             >
               {initials}
             </button>
             {menuOpen && (
-              <div className="absolute right-0 top-11 w-56 rounded-xl border border-line bg-white p-2 shadow-xl">
+              <div className="pop-in absolute right-0 top-11 w-56 rounded-xl border border-line bg-white p-2 shadow-lift">
                 <div className="border-b border-line px-3 py-2">
                   <div className="text-sm font-semibold">{profile?.full_name ?? "Welcome"}</div>
                   <div className="text-xs text-ink-500 truncate">{email}</div>
@@ -112,10 +114,10 @@ export default function AppNav({ profile, email }: { profile: Profile | null; em
       {mobileOpen && (
         <div className="border-t border-line bg-white px-6 py-3 md:hidden">
           <div className="flex items-center gap-3 pb-3">
-            <div className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-brand to-gold text-xs font-bold text-white">{initials}</div>
+            <div className="flex h-9 w-9 items-center justify-center rounded-full bg-ink text-xs font-bold text-paper">{initials}</div>
             <div>
               <div className="text-sm font-semibold">{profile?.full_name ?? "Welcome"}</div>
-              <div className="text-xs text-ink-500">⚡ {credits} credits · <span className="capitalize">{plan}</span></div>
+              <div className="text-xs text-ink-500">{credits} credits · <span className="capitalize">{plan}</span></div>
             </div>
           </div>
           <div className="grid gap-1 border-t border-line pt-3">

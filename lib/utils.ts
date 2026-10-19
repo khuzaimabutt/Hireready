@@ -8,7 +8,7 @@ export function formatDate(d: string | Date): string {
 }
 
 export function scoreColor(score: number): string {
-  if (score >= 80) return "text-green-600 bg-green-50 border-green-200";
-  if (score >= 60) return "text-yellow-700 bg-yellow-50 border-yellow-200";
-  return "text-red-600 bg-red-50 border-red-200";
+  if (score >= 80) return "text-brand bg-brand-50 border-brand-100";
+  if (score >= 60) return "text-gold-700 bg-gold-50 border-gold/40";
+  return "text-rust bg-rust-50 border-rust-200";
 }

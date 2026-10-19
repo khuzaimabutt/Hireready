@@ -46,7 +46,7 @@ export default function DashboardResumes({
   return (
     <section>
       <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
-        <h2 className="font-display text-xl font-semibold">My Resumes</h2>
+        <h2 className="font-display text-2xl font-medium">My resumes</h2>
         <div className="text-xs text-ink-500">{filtered.length} of {resumes.length}</div>
       </div>
 
@@ -73,18 +73,20 @@ export default function DashboardResumes({
       )}
 
       {(!resumes || resumes.length === 0) ? (
-        <div className="card flex flex-col items-center py-16 text-center">
-          <div className="mb-4 text-5xl">📄</div>
-          <h3 className="font-display text-xl font-semibold">No resumes yet</h3>
-          <p className="mt-1 text-sm text-ink-500">Create your first resume to get started.</p>
+        <div className="card rise flex flex-col items-center border-dashed py-14 text-center">
+          <EmptySheet />
+          <h3 className="mt-6 font-display text-2xl font-medium">No resumes yet</h3>
+          <p className="mt-1 max-w-sm text-sm text-ink-500">Create your first resume. It takes a guided form, then one generate step.</p>
           <NewResumeButton userType={userType} className="mt-6" />
         </div>
       ) : filtered.length === 0 ? (
-        <div className="card py-12 text-center text-sm text-ink-500">No matches. Try clearing search or filters.</div>
+        <div className="card rise py-12 text-center text-sm text-ink-500">No matches. Try clearing search or filters.</div>
       ) : (
         <div className="grid gap-4 md:grid-cols-3">
-          {filtered.map((r) => (
-            <ResumeCard key={r.id} resume={r} onChange={refresh} />
+          {filtered.map((r, i) => (
+            <div key={r.id} className="rise" style={{ ["--i" as string]: Math.min(i, 8) }}>
+              <ResumeCard resume={r} onChange={refresh} />
+            </div>
           ))}
         </div>
       )}
@@ -96,11 +98,27 @@ function FilterChip({ active, onClick, children }: { active: boolean; onClick: (
   return (
     <button
       onClick={onClick}
-      className={`rounded-full px-3 py-1.5 text-xs font-medium transition ${
-        active ? "bg-brand text-white" : "border border-line bg-white text-ink-600 hover:bg-paper-100"
+      className={`rounded-full px-3.5 py-2 text-xs font-medium transition-colors duration-150 ${
+        active ? "bg-ink text-white" : "border border-line bg-white text-ink-600 hover:border-ink-300 hover:text-ink"
       }`}
     >
       {children}
     </button>
+  );
+}
+
+function EmptySheet() {
+  return (
+    <svg width="96" height="120" viewBox="0 0 96 120" fill="none" aria-hidden="true">
+      <rect x="10" y="14" width="76" height="98" rx="8" fill="#EEE9DD" transform="rotate(4 48 63)" />
+      <rect x="6" y="8" width="76" height="98" rx="8" fill="#fff" stroke="#E2DCCF" strokeWidth="2" />
+      <rect x="18" y="22" width="34" height="6" rx="3" fill="#15171C" />
+      <rect x="18" y="34" width="22" height="4" rx="2" fill="#0F6E5E" />
+      <rect x="18" y="48" width="52" height="3" rx="1.5" fill="#E2DCCF" />
+      <rect x="18" y="56" width="46" height="3" rx="1.5" fill="#E2DCCF" />
+      <rect x="18" y="64" width="50" height="3" rx="1.5" fill="#E2DCCF" />
+      <rect x="18" y="78" width="30" height="4" rx="2" fill="#0F6E5E" opacity="0.5" />
+      <rect x="18" y="88" width="52" height="3" rx="1.5" fill="#E2DCCF" />
+    </svg>
   );
 }

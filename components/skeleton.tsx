@@ -9,7 +9,7 @@ export function ResumeCardSkeleton() {
         <Skeleton className="h-5 w-20" />
         <Skeleton className="h-5 w-16" />
       </div>
-      <Skeleton className="h-32 w-full" />
+      <Skeleton className="aspect-[8.5/11] w-full" />
       <Skeleton className="h-6 w-3/4" />
       <Skeleton className="h-4 w-1/2" />
       <div className="flex justify-between">

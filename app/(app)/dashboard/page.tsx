@@ -37,22 +37,23 @@ export default async function DashboardPage() {
       {/* Welcome */}
       <div className="flex flex-col items-start justify-between gap-4 md:flex-row md:items-center">
         <div>
-          <h1 className="font-display text-3xl font-bold">
-            Welcome back, {profile?.full_name?.split(" ")[0] || "there"}
-            <span className="ml-3 inline-block rounded-full bg-brand/10 px-3 py-1 text-sm font-medium text-brand capitalize">
-              {profile?.user_type}
-            </span>
+          <div className="eyebrow">Your workspace</div>
+          <h1 className="mt-2 font-display text-3xl font-medium leading-tight sm:text-4xl">
+            Welcome back, <em className="font-normal italic text-brand">{profile?.full_name?.split(" ")[0] || "there"}</em>
           </h1>
-          <p className="mt-1 text-ink-600">Let's build something that gets you hired.</p>
+          <p className="mt-2 flex flex-wrap items-center gap-2 text-ink-600">
+            Pick up a draft or start a new resume.
+            {profile?.user_type && <span className="chip capitalize">{profile.user_type}</span>}
+          </p>
         </div>
         <NewResumeButton userType={profile?.user_type ?? "fresher"} />
       </div>
 
       {/* Continue card */}
       {continueResume && (
-        <div className="card flex flex-col items-start gap-3 border-brand/30 bg-gradient-to-br from-brand/5 to-transparent md:flex-row md:items-center md:justify-between">
+        <div className="card rise flex flex-col items-start gap-3 border-l-4 border-l-brand md:flex-row md:items-center md:justify-between" style={{ ["--i" as string]: 1 }}>
           <div>
-            <div className="text-xs uppercase tracking-widest text-brand">{lastDraft ? "Continue where you left off" : "Most recent"}</div>
+            <div className="eyebrow">{lastDraft ? "Continue where you left off" : "Most recent"}</div>
             <div className="mt-1 font-display text-lg font-semibold">{continueResume.title}</div>
             <div className="text-sm text-ink-500">{continueResume.target_role || "No target role yet"}</div>
           </div>
@@ -66,16 +67,16 @@ export default async function DashboardPage() {
       )}
 
       {/* Stats */}
-      <div className="grid gap-4 md:grid-cols-4">
-        <Stat label="Resumes Created" value={totalResumes} />
-        <Stat label="Avg ATS Score" value={avgAts || "—"} />
-        <Stat label="Credits Remaining" value={profile?.credits_remaining ?? 0} />
-        <Stat label="Plan" value={(profile?.plan ?? "free").replace("_", " ")} capitalize />
+      <div className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-4">
+        <Stat i={2} label="Resumes created" value={totalResumes} />
+        <Stat i={3} label="Average ATS score" value={avgAts || "-"} />
+        <Stat i={4} label="Credits remaining" value={profile?.credits_remaining ?? 0} />
+        <Stat i={5} label="Plan" value={(profile?.plan ?? "free").replace("_", " ")} capitalize />
       </div>
 
       {(profile?.plan ?? "free") === "free" && (
-        <div className="rounded-xl border border-gold/30 bg-gradient-to-r from-gold/10 via-brand/5 to-transparent p-4 text-sm">
-          <div className="flex items-center justify-between gap-4">
+        <div className="rise rounded-xl border border-line bg-paper-50 p-4 text-sm" style={{ ["--i" as string]: 6 }}>
+          <div className="flex flex-col items-start justify-between gap-3 sm:flex-row sm:items-center sm:gap-4">
             <div>
               <div className="font-semibold">You're on the Free plan</div>
               <div className="text-ink-600">Upgrade for unlimited resumes, all templates, and priority AI.</div>
@@ -90,11 +91,11 @@ export default async function DashboardPage() {
   );
 }
 
-function Stat({ label, value, capitalize }: { label: string; value: string | number; capitalize?: boolean }) {
+function Stat({ label, value, capitalize, i = 0 }: { label: string; value: string | number; capitalize?: boolean; i?: number }) {
   return (
-    <div className="card">
-      <div className="text-xs uppercase tracking-wider text-ink-500">{label}</div>
-      <div className={`mt-2 font-display text-2xl font-bold ${capitalize ? "capitalize" : ""}`}>{value}</div>
+    <div className="card rise !p-4 sm:!p-6" style={{ ["--i" as string]: i }}>
+      <div className="text-[11px] font-semibold uppercase tracking-[0.14em] text-ink-500">{label}</div>
+      <div className={`mt-2 font-display text-3xl font-medium tabular-nums ${capitalize ? "capitalize" : ""}`}>{value}</div>
     </div>
   );
 }
