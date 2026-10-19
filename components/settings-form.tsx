@@ -50,7 +50,7 @@ export default function SettingsForm({ profile }: { profile: any }) {
     if (!confirm("Delete your account? All resumes and data will be permanently removed. This cannot be undone.")) return;
     if (!confirm("Are you absolutely sure? Type 'DELETE' to confirm in the next prompt.")) return;
     const c = prompt("Type DELETE to confirm:");
-    if (c !== "DELETE") return toast.error("Cancelled — confirmation didn't match");
+    if (c !== "DELETE") return toast.error("Cancelled, confirmation didn't match");
     setDeleting(true);
     const res = await fetch("/api/account/delete", { method: "POST" });
     setDeleting(false);
@@ -64,12 +64,14 @@ export default function SettingsForm({ profile }: { profile: any }) {
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-wrap gap-1 rounded-lg bg-paper-200 p-1">
+      <div className="flex w-full gap-1 overflow-x-auto rounded-xl bg-paper-200 p-1 sm:w-fit" role="tablist">
         {TABS.map((t) => (
           <button
             key={t}
             onClick={() => setTab(t)}
-            className={`rounded-md px-4 py-1.5 text-sm font-medium transition ${tab === t ? "bg-white text-brand shadow-sm" : "text-ink-600 hover:text-ink"}`}
+            role="tab"
+            aria-selected={tab === t}
+            className={`shrink-0 rounded-lg px-4 py-2 text-sm font-semibold transition-colors duration-150 ${tab === t ? "bg-white text-brand shadow-paper" : "text-ink-600 hover:text-ink"}`}
           >
             {t}
           </button>
@@ -77,7 +79,7 @@ export default function SettingsForm({ profile }: { profile: any }) {
       </div>
 
       {tab === "Profile" && (
-        <div className="card">
+        <div key="Profile" className="card step-next">
           <h2 className="font-display text-lg font-semibold">Profile</h2>
           <div className="mt-4 grid gap-4 md:grid-cols-2">
             <div>
@@ -107,7 +109,7 @@ export default function SettingsForm({ profile }: { profile: any }) {
       )}
 
       {tab === "Account" && (
-        <div className="space-y-4">
+        <div key="Account" className="step-next space-y-4">
           <div className="card">
             <h2 className="font-display text-lg font-semibold">Password</h2>
             <p className="mt-1 text-sm text-ink-600">Change your password here. Use a strong, unique password.</p>
@@ -118,9 +120,9 @@ export default function SettingsForm({ profile }: { profile: any }) {
             <p className="mt-1 text-sm text-ink-600">Sign out of all devices where you're currently logged in.</p>
             <button onClick={signOutAll} className="btn-secondary mt-4">Sign out everywhere</button>
           </div>
-          <div className="card border-red-200 bg-red-50/50">
-            <h2 className="font-display text-lg font-semibold text-red-700">Delete account</h2>
-            <p className="mt-1 text-sm text-red-700/80">Permanently delete your account and all associated data. Cannot be undone.</p>
+          <div className="card border-rust-200 bg-rust-50">
+            <h2 className="font-display text-lg font-semibold text-rust">Delete account</h2>
+            <p className="mt-1 text-sm text-rust/80">Permanently delete your account and all associated data. Cannot be undone.</p>
             <button onClick={deleteAccount} disabled={deleting} className="btn-danger mt-4">
               {deleting ? "Deleting..." : "Delete my account"}
             </button>
@@ -129,10 +131,10 @@ export default function SettingsForm({ profile }: { profile: any }) {
       )}
 
       {tab === "Subscription" && (
-        <div className="card">
+        <div key="Subscription" className="card step-next">
           <h2 className="font-display text-lg font-semibold">Plan & credits</h2>
           <div className="mt-4 grid gap-4 md:grid-cols-3">
-            <div className="rounded-lg border border-line p-4">
+            <div className="rounded-lg border border-line bg-paper-50 p-4">
               <div className="text-xs uppercase tracking-wider text-ink-500">Current plan</div>
               <div className="mt-1 font-display text-xl font-semibold capitalize">{(profile?.plan ?? "free").replace("_", " ")}</div>
             </div>
@@ -143,7 +145,7 @@ export default function SettingsForm({ profile }: { profile: any }) {
             <div className="rounded-lg border border-line p-4">
               <div className="text-xs uppercase tracking-wider text-ink-500">Member since</div>
               <div className="mt-1 font-display text-xl font-semibold">
-                {profile?.created_at ? new Date(profile.created_at).toLocaleDateString("en-US", { month: "short", year: "numeric" }) : "—"}
+                {profile?.created_at ? new Date(profile.created_at).toLocaleDateString("en-US", { month: "short", year: "numeric" }) : "-"}
               </div>
             </div>
           </div>
@@ -152,30 +154,23 @@ export default function SettingsForm({ profile }: { profile: any }) {
       )}
 
       {tab === "Privacy" && (
-        <div className="space-y-4">
+        <div key="Privacy" className="step-next space-y-4">
           <div className="card">
             <h2 className="font-display text-lg font-semibold">Export your data</h2>
             <p className="mt-1 text-sm text-ink-600">
               Download a JSON file containing all your profile, resumes, and payment history.
               You can re-import or use this file at any time.
             </p>
-            <button onClick={exportData} className="btn-secondary mt-4">↓ Download my data</button>
+            <button onClick={exportData} className="btn-secondary mt-4">Download my data</button>
           </div>
           <div className="card">
             <h2 className="font-display text-lg font-semibold">Privacy & security</h2>
             <ul className="mt-3 space-y-2 text-sm text-ink-600">
-              <li>✓ All data is encrypted at rest in our database</li>
-              <li>✓ Row-level security restricts access to your account only</li>
-              <li>✓ We never sell or share your data with third parties</li>
-              <li>✓ AI processing is stateless — your inputs are not used for training</li>
+              <li className="flex gap-2"><span className="text-brand" aria-hidden="true">&#10003;</span>Data is stored in a Supabase Postgres database</li>
+              <li className="flex gap-2"><span className="text-brand" aria-hidden="true">&#10003;</span>Row-level security limits each query to your own account</li>
+              <li className="flex gap-2"><span className="text-brand" aria-hidden="true">&#10003;</span>Resume generation in this demo uses a built-in mock engine, so your text is not sent to an AI provider</li>
             </ul>
-            <div className="mt-4 flex gap-3">
-              <a href="#" className="text-sm text-brand hover:underline">Privacy policy</a>
-              <span className="text-ink-300">·</span>
-              <a href="#" className="text-sm text-brand hover:underline">Terms of service</a>
-              <span className="text-ink-300">·</span>
-              <a href="#" className="text-sm text-brand hover:underline">Cookie policy</a>
-            </div>
+            <p className="mt-4 text-xs text-ink-500">This is a portfolio demo. Use sample data rather than real personal details.</p>
           </div>
         </div>
       )}

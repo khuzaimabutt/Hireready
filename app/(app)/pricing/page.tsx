@@ -13,9 +13,14 @@ export default async function PricingPage() {
   return (
     <div className="space-y-8">
       <div className="text-center">
-        <div className="text-xs uppercase tracking-widest text-brand">Pricing</div>
-        <h1 className="mt-2 font-display text-4xl font-bold">Pick the plan that fits your career stage</h1>
-        <p className="mt-3 text-ink-600">Start free. Upgrade when you need unlimited resumes, premium templates, and priority AI.</p>
+        <div className="eyebrow">Pricing</div>
+        <h1 className="mx-auto mt-3 max-w-2xl font-display text-4xl font-medium leading-tight sm:text-5xl">
+          Pick the plan that fits your <em className="font-normal italic text-brand">career stage</em>
+        </h1>
+        <p className="mx-auto mt-4 max-w-xl text-ink-600">Start free. Upgrade when you need more resumes, all templates and the job matcher.</p>
+        <p className="mx-auto mt-4 max-w-xl rounded-lg border border-gold/40 bg-gold-50 px-4 py-2 text-xs text-gold-700">
+          Demo checkout: buying a plan is simulated, no card is charged and no Stripe payment happens.
+        </p>
       </div>
       <PricingPlans currentPlan={(profile?.plan as any) ?? "free"} />
     </div>

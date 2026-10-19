@@ -26,8 +26,9 @@ export default async function PreviewPage({
 
   if (!resume.generated) {
     return (
-      <div className="card text-center">
-        <h2 className="font-display text-xl font-semibold">This resume hasn't been generated yet.</h2>
+      <div className="card rise mx-auto max-w-lg py-12 text-center">
+        <div className="eyebrow">Not generated yet</div>
+        <h2 className="mt-3 font-display text-2xl font-medium">This resume has not been generated.</h2>
         <p className="mt-1 text-ink-500">Open the builder to fill it in and run AI generation.</p>
         <Link href={`/builder/${resume.id}`} className="btn-primary mt-6 inline-flex">Go to builder</Link>
       </div>
@@ -42,7 +43,7 @@ export default async function PreviewPage({
 
   return (
     <div className="grid gap-6 lg:grid-cols-[1fr_340px]">
-      <div className="card overflow-hidden p-0">
+      <div className="card rise overflow-hidden self-start p-0 shadow-sheet">
         <ResumeRenderer
           generated={generated}
           fullName={(resume.content as any)?.personal?.full_name ?? "Your Name"}
@@ -53,15 +54,15 @@ export default async function PreviewPage({
       </div>
 
       <aside className="space-y-4">
-        <div className="card text-center">
-          <div className="text-xs font-semibold uppercase tracking-wider text-ink-500">ATS Score</div>
+        <div className="card rise text-center" style={{ ["--i" as string]: 2 }}>
+          <div className="text-[11px] font-semibold uppercase tracking-[0.14em] text-ink-500">ATS score</div>
           <div className="mt-3 flex justify-center">
             <AtsScoreRing score={resume.ats_score ?? 0} />
           </div>
-          <div className="mt-2 text-xs text-ink-500">
-            {(resume.ats_score ?? 0) >= 80 && "Strong — likely to pass screening"}
-            {(resume.ats_score ?? 0) >= 60 && (resume.ats_score ?? 0) < 80 && "Decent — apply the warnings below"}
-            {(resume.ats_score ?? 0) < 60 && "Needs work — address critical fixes first"}
+          <div className="mt-3 text-xs text-ink-500">
+            {(resume.ats_score ?? 0) >= 80 && "Strong. Likely to pass a keyword screen."}
+            {(resume.ats_score ?? 0) >= 60 && (resume.ats_score ?? 0) < 80 && "Decent. Apply the warnings below."}
+            {(resume.ats_score ?? 0) < 60 && "Needs work. Address critical fixes first."}
           </div>
         </div>
 

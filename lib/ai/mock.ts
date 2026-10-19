@@ -1,6 +1,6 @@
 import type { ResumeContent, GeneratedResume, UserType } from "@/lib/types";
 
-// Deterministic mock AI — produces resume content that looks like it came from GPT-4o.
+// Deterministic mock AI, produces resume content that looks like it came from GPT-4o.
 // Uses templated phrases and the user's actual inputs to feel personalized.
 
 const ACTION_VERBS = {
@@ -111,7 +111,7 @@ export async function mockGenerate(
         });
         return {
           heading: exp.title,
-          subheading: exp.company + (exp.location ? ` — ${exp.location}` : ""),
+          subheading: exp.company + (exp.location ? `, ${exp.location}` : ""),
           meta: `${exp.start_date ?? ""}${exp.end_date || exp.is_current ? " – " + (exp.is_current ? "Present" : exp.end_date) : ""}`,
           bullets,
           tags: exp.technologies,
@@ -182,7 +182,7 @@ export async function mockGenerate(
   return { headline, sections };
 }
 
-// Per-bullet rewriter — rewrites a single bullet in 3 styles, picks the best one
+// Per-bullet rewriter, rewrites a single bullet in 3 styles, picks the best one
 export async function mockRewriteBullet(
   original: string,
   type: UserType,
@@ -222,10 +222,10 @@ export function calculateAtsScoreV2(
   const tips: AtsTip[] = [];
 
   if (content.personal?.email && content.personal?.phone) score += 10;
-  else tips.push({ severity: "critical", category: "contact", text: "Missing complete contact info — recruiters can't reach you.", fix: "Add both email and phone in Basics." });
+  else tips.push({ severity: "critical", category: "contact", text: "Missing complete contact info, recruiters can't reach you.", fix: "Add both email and phone in Basics." });
 
   if (!content.personal?.linkedin) {
-    tips.push({ severity: "warning", category: "contact", text: "No LinkedIn URL — 87% of recruiters check LinkedIn first.", fix: "Add your LinkedIn profile URL." });
+    tips.push({ severity: "warning", category: "contact", text: "No LinkedIn URL, recruiters often check LinkedIn.", fix: "Add your LinkedIn profile URL." });
   } else score += 3;
 
   score += Math.min(20, generated.sections.length * 3);
@@ -238,7 +238,7 @@ export function calculateAtsScoreV2(
   const found = keywords.filter((k) => text.includes(k)).length;
   score += Math.min(15, found * 5);
   if (keywords.length && found < keywords.length) {
-    tips.push({ severity: "critical", category: "keywords", text: `Target role keywords missing — only ${found}/${keywords.length} found.`, fix: `Reinforce: "${targetRole}" in summary and bullets.` });
+    tips.push({ severity: "critical", category: "keywords", text: `Target role keywords missing, only ${found}/${keywords.length} found.`, fix: `Reinforce: "${targetRole}" in summary and bullets.` });
   }
 
   const skillCount =
@@ -266,7 +266,7 @@ export function calculateAtsScoreV2(
     tips.push({ severity: "suggestion", category: "structure", text: "No professional summary.", fix: "Add a 2–3 sentence summary at the top." });
   }
 
-  if (tips.length === 0) tips.push({ severity: "suggestion", category: "polish", text: "Looking great — tailor each version to a specific job description.", fix: "Save a copy per role and tweak keywords." });
+  if (tips.length === 0) tips.push({ severity: "suggestion", category: "polish", text: "Looking great, tailor each version to a specific job description.", fix: "Save a copy per role and tweak keywords." });
 
   return { score: Math.min(100, Math.max(0, score)), tips: tips.slice(0, 8) };
 }

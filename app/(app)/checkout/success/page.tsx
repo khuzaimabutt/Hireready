@@ -5,36 +5,37 @@ export default function CheckoutSuccess({ searchParams }: { searchParams: { plan
   return (
     <div className="mx-auto max-w-2xl">
       <div className="card text-center">
-        <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-green-400 to-emerald-500 text-3xl text-white shadow-lg float-up">
-          ✓
+        <div className="pop-in mx-auto mb-5 flex h-14 w-14 items-center justify-center rounded-full bg-brand-50 text-brand ring-1 ring-brand-100">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>
         </div>
-        <h1 className="font-display text-3xl font-bold">Payment received</h1>
+        <div className="eyebrow">Demo checkout</div>
+        <h1 className="mt-2 font-display text-3xl font-medium">Simulated purchase complete</h1>
         <p className="mt-2 text-ink-600">
-          Your <strong className="capitalize">{plan}</strong> credits have been added to your account.
+          The <strong className="capitalize">{plan}</strong> credits were added to this demo account. No card was charged and no Stripe payment took place.
         </p>
 
         <div className="mt-8 rounded-xl border border-line bg-paper-50 p-5 text-left">
-          <div className="text-xs font-semibold uppercase tracking-widest text-ink-500">What's next</div>
+          <div className="text-xs font-semibold uppercase tracking-widest text-ink-500">What is next</div>
           <ol className="mt-3 space-y-3 text-sm text-ink-700">
             <li className="flex gap-3">
-              <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand/15 text-xs font-bold text-brand">1</span>
+              <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-50 text-xs font-bold text-brand-700">1</span>
               <div>
                 <div className="font-medium">Create your next resume</div>
                 <div className="text-ink-500">Tailored to a specific role gets you the best ATS score.</div>
               </div>
             </li>
             <li className="flex gap-3">
-              <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand/15 text-xs font-bold text-brand">2</span>
+              <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-50 text-xs font-bold text-brand-700">2</span>
               <div>
                 <div className="font-medium">Try the new templates</div>
                 <div className="text-ink-500">Switch templates from the preview page in one click.</div>
               </div>
             </li>
             <li className="flex gap-3">
-              <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand/15 text-xs font-bold text-brand">3</span>
+              <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-50 text-xs font-bold text-brand-700">3</span>
               <div>
                 <div className="font-medium">Use AI bullet rewriter</div>
-                <div className="text-ink-500">Click ✨ next to any bullet for a stronger version.</div>
+                <div className="text-ink-500">Use Improve with AI under any bullet for a stronger version.</div>
               </div>
             </li>
           </ol>
@@ -42,12 +43,9 @@ export default function CheckoutSuccess({ searchParams }: { searchParams: { plan
 
         <div className="mt-8 flex justify-center gap-3">
           <Link href="/dashboard" className="btn-primary">Back to dashboard</Link>
-          <Link href="/pricing" className="btn-secondary">View invoice</Link>
+          <Link href="/pricing" className="btn-secondary">Back to plans</Link>
         </div>
 
-        <p className="mt-6 text-[11px] text-ink-500">
-          Receipt sent to your email. Need a refund? <a href="#" className="underline hover:text-ink-600">Contact support</a> within 7 days.
-        </p>
       </div>
     </div>
   );

@@ -36,7 +36,7 @@ export default function JobMatch({ resumeId }: { resumeId: string }) {
   }
 
   const score = result?.match_score ?? 0;
-  const tone = score >= 70 ? "text-green-600" : score >= 50 ? "text-amber-600" : "text-red-600";
+  const tone = score >= 70 ? "text-brand" : score >= 50 ? "text-gold" : "text-rust";
 
   return (
     <div className="card">
@@ -46,7 +46,7 @@ export default function JobMatch({ resumeId }: { resumeId: string }) {
           <p className="text-xs text-ink-500">See how well this resume fits a specific posting.</p>
         </div>
         <button onClick={() => setOpen((v) => !v)} className="btn-secondary">
-          {open ? "Hide" : "🎯 Match"}
+          {open ? "Hide" : "Match"}
         </button>
       </div>
 
@@ -76,7 +76,7 @@ export default function JobMatch({ resumeId }: { resumeId: string }) {
                 </span>
               </div>
               <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-paper-300">
-                <div className={`h-full transition-all ${score >= 70 ? "bg-green-500" : score >= 50 ? "bg-amber-500" : "bg-red-500"}`} style={{ width: `${score}%` }} />
+                <div className={`h-full transition-all ${score >= 70 ? "bg-brand" : score >= 50 ? "bg-gold" : "bg-rust"}`} style={{ width: `${score}%` }} />
               </div>
 
               {result.missing_keywords.length > 0 && (
@@ -84,11 +84,11 @@ export default function JobMatch({ resumeId }: { resumeId: string }) {
                   <div className="text-xs font-semibold uppercase tracking-wider text-ink-500">Missing keywords</div>
                   <div className="mt-2 flex flex-wrap gap-1.5">
                     {result.missing_keywords.map((k) => (
-                      <span key={k} className="rounded-full bg-amber-100 px-2 py-0.5 text-xs text-amber-800">{k}</span>
+                      <span key={k} className="rounded-full bg-gold-50 px-2 py-0.5 text-xs text-gold-700">{k}</span>
                     ))}
                   </div>
                   <p className="mt-3 text-xs text-ink-500">
-                    Tip: weave these naturally into your bullets and skills — don't keyword-stuff.
+                    Tip: weave these naturally into your bullets and skills, don't keyword-stuff.
                   </p>
                 </div>
               )}
