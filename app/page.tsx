@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Logo from "@/components/logo";
+import AtsScoreRing from "@/components/ats-score-ring";
 
 export default function LandingPage() {
   return (
@@ -91,39 +92,39 @@ function ProductShot() {
       <div className="relative rounded-xl border border-line bg-white p-7 shadow-sheet sm:p-9" aria-hidden="true">
         <div className="flex items-end justify-between gap-4 border-b border-ink pb-4">
           <div>
-            <div className="font-display text-2xl font-semibold leading-none">Alex Morgan</div>
-            <div className="mt-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-ink-500">Software Engineer</div>
+            <div className="wipe font-display text-2xl font-semibold leading-none" style={D(200)}>Alex Morgan</div>
+            <div className="wipe mt-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-ink-500" style={D(450)}>Software Engineer</div>
           </div>
           <div className="text-right text-[11px] leading-5 text-ink-500">
-            <div>Portfolio link</div>
-            <div>City, Country</div>
+            <div className="wipe" style={D(600)}>Portfolio link</div>
+            <div className="wipe" style={D(700)}>City, Country</div>
           </div>
         </div>
-        <SheetHeading>Summary</SheetHeading>
-        <p className="text-[12px] leading-relaxed text-ink-700">
+        <SheetHeading d={850}>Summary</SheetHeading>
+        <p className="wipe text-[12px] leading-relaxed text-ink-700" style={D(1000)}>
           Engineer with 4 years building production web platforms. Turns loose requirements into reliable, well-tested systems.
         </p>
-        <SheetHeading>Experience</SheetHeading>
-        <div className="flex items-baseline justify-between text-[12px]">
+        <SheetHeading d={1350}>Experience</SheetHeading>
+        <div className="wipe flex items-baseline justify-between text-[12px]" style={D(1500)}>
           <span className="font-semibold">Senior Engineer, Example Co.</span>
           <span className="text-ink-500">2021 to now</span>
         </div>
         <ul className="mt-1.5 space-y-1 text-[12px] leading-relaxed text-ink-700">
-          <li className="flex gap-2"><span className="mt-[7px] h-1 w-1 shrink-0 rounded-full bg-ink" />Led the move to containers, raising uptime to 99.9%.</li>
-          <li className="flex gap-2 rounded bg-brand-50 px-1 -mx-1"><span className="mt-[7px] h-1 w-1 shrink-0 rounded-full bg-brand" />Cut API latency 42% across five services.</li>
+          <li className="wipe flex gap-2" style={D(1750)}><span className="mt-[7px] h-1 w-1 shrink-0 rounded-full bg-ink" />Led the move to containers, raising uptime to 99.9%.</li>
+          <li className="wipe -mx-1 flex gap-2 rounded bg-brand-50 px-1" style={{ ...D(2050), ["--wipe-bg" as string]: "#E8F3F0" }}><span className="mt-[7px] h-1 w-1 shrink-0 rounded-full bg-brand" />Cut API latency 42% across five services.</li>
         </ul>
-        <SheetHeading>Skills</SheetHeading>
+        <SheetHeading d={2350}>Skills</SheetHeading>
         <div className="flex flex-wrap gap-1.5 text-[11px]">
-          {["TypeScript", "React", "Next.js", "PostgreSQL", "AWS"].map((s) => (
-            <span key={s} className="rounded border border-line px-2 py-0.5 text-ink-700">{s}</span>
+          {["TypeScript", "React", "Next.js", "PostgreSQL", "AWS"].map((s, i) => (
+            <span key={s} className="pop-in rounded border border-line px-2 py-0.5 text-ink-700" style={D(2500 + i * 90)}>{s}</span>
           ))}
         </div>
       </div>
 
       {/* ATS panel */}
-      <div className="float-up absolute -left-3 -bottom-10 w-48 rounded-xl border border-line bg-white p-4 shadow-lift sm:-left-10" aria-hidden="true">
+      <div className="pop-in absolute -left-3 -bottom-10 w-48 rounded-xl border border-line bg-white p-4 shadow-lift sm:-left-10" style={D(2900)} aria-hidden="true">
         <div className="flex items-center gap-3">
-          <ScoreDial value={94} />
+          <AtsScoreRing score={94} size={48} stroke={5} caption={false} delay={3000} />
           <div>
             <div className="text-[10px] font-semibold uppercase tracking-[0.16em] text-ink-500">ATS score</div>
             <div className="text-sm font-semibold text-brand">Strong</div>
@@ -137,7 +138,7 @@ function ProductShot() {
       </div>
 
       {/* rewrite chip */}
-      <div className="float-up absolute -right-2 -top-5 rounded-lg bg-ink px-3.5 py-2.5 text-[11px] text-white shadow-lift sm:-right-6" aria-hidden="true">
+      <div className="pop-in absolute -right-2 -top-5 rounded-lg bg-ink px-3.5 py-2.5 text-[11px] text-white shadow-lift sm:-right-6" style={D(2250)} aria-hidden="true">
         <div className="font-semibold text-brand-100">Bullet rewritten</div>
         <div className="text-white/75">&ldquo;Worked on APIs&rdquo; to measurable result</div>
       </div>
@@ -145,21 +146,11 @@ function ProductShot() {
   );
 }
 
-function SheetHeading({ children }: { children: React.ReactNode }) {
-  return <div className="mb-1.5 mt-5 text-[10px] font-bold uppercase tracking-[0.2em] text-ink">{children}</div>;
-}
+/** Animation delay in ms for the hero sheet fill-in. */
+const D = (ms: number) => ({ ["--d" as string]: `${ms}ms` });
 
-function ScoreDial({ value }: { value: number }) {
-  const r = 18;
-  const c = 2 * Math.PI * r;
-  return (
-    <svg width="48" height="48" viewBox="0 0 48 48" aria-hidden="true">
-      <circle cx="24" cy="24" r={r} fill="none" stroke="#E8F3F0" strokeWidth="5" />
-      <circle cx="24" cy="24" r={r} fill="none" stroke="#0F6E5E" strokeWidth="5" strokeLinecap="round"
-        strokeDasharray={c} strokeDashoffset={c * (1 - value / 100)} transform="rotate(-90 24 24)" />
-      <text x="24" y="28.5" textAnchor="middle" fontSize="13" fontWeight="700" fill="#15171C">{value}</text>
-    </svg>
-  );
+function SheetHeading({ children, d = 0 }: { children: React.ReactNode; d?: number }) {
+  return <div className="wipe mb-1.5 mt-5 w-fit text-[10px] font-bold uppercase tracking-[0.2em] text-ink" style={D(d)}>{children}</div>;
 }
 
 /* -------------------------------------------- Facts (no social proof) */
