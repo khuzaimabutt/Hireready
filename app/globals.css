@@ -79,47 +79,95 @@ h1, h2, h3, .font-display {
 }
 .pulse-soft { animation: pulse-soft 2s ease-in-out infinite; }
 
-@keyframes shimmer {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
+@keyframes sheen {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(100%); }
 }
-.shimmer {
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
-  background-size: 200% 100%;
-  animation: shimmer 1.5s infinite;
-}
-
+/* Shimmer placeholder: a sheen slides across a paper-tone block (transform only). */
 .skeleton {
-  background: linear-gradient(90deg, #ece7dc 25%, #f5f1e8 37%, #ece7dc 63%);
-  background-size: 400% 100%;
-  animation: shimmer 1.4s ease-in-out infinite;
+  position: relative;
+  overflow: hidden;
+  background: #ece7dc;
   border-radius: 6px;
 }
+.skeleton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.62), transparent);
+  transform: translateX(-100%);
+  animation: sheen 1.4s ease-in-out infinite;
+}
+
+/* ---------- Motion kit (transform and opacity only) ----------
+   Timings: 160ms state changes, 360ms step slides, 600 to 700ms entrances,
+   1100ms ring draw. One easing curve everywhere. */
+
+/* Ink wipe: a paper-coloured cover scales away to the right, so text looks written in. */
+.wipe { position: relative; }
+.wipe::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--wipe-bg, #fff);
+  transform-origin: right center;
+  animation: wipe 640ms cubic-bezier(0.16, 1, 0.3, 1) var(--d, 0ms) both;
+  pointer-events: none;
+}
+@keyframes wipe { from { transform: scaleX(1); } to { transform: scaleX(0); } }
+
+/* Pop in a chip or panel after the sheet has filled */
+.pop-in { animation: pop-in 520ms cubic-bezier(0.16, 1, 0.3, 1) var(--d, 0ms) both; }
+@keyframes pop-in { from { opacity: 0; transform: translateY(10px) scale(0.97); } to { opacity: 1; transform: none; } }
+
+/* ATS ring: stroke draws from empty to the value set on the element (--c circumference, --to final offset) */
+.ring-draw { animation: ring-draw 1100ms cubic-bezier(0.16, 1, 0.3, 1) var(--d, 120ms) both; }
+@keyframes ring-draw { from { stroke-dashoffset: var(--c); } to { stroke-dashoffset: var(--to); } }
+
+/* Builder steps slide in from the side they are on */
+.step-next { animation: step-next 360ms cubic-bezier(0.16, 1, 0.3, 1) both; }
+.step-prev { animation: step-prev 360ms cubic-bezier(0.16, 1, 0.3, 1) both; }
+@keyframes step-next { from { opacity: 0; transform: translateX(28px); } to { opacity: 1; transform: none; } }
+@keyframes step-prev { from { opacity: 0; transform: translateX(-28px); } to { opacity: 1; transform: none; } }
+
+/* Staggered entrance for lists and grids */
+.rise { animation: fade 600ms cubic-bezier(0.16, 1, 0.3, 1) calc(var(--i, 0) * 60ms) both; }
 
 @layer components {
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 rounded-lg bg-ink px-5 py-2.5 text-sm font-semibold text-white shadow-paper transition duration-150 hover:bg-ink-800 active:translate-y-px disabled:cursor-not-allowed disabled:opacity-50;
+    @apply inline-flex items-center justify-center gap-2 rounded-lg bg-ink px-5 py-2.5 text-sm font-semibold text-white shadow-paper transition-[background-color,border-color,color,transform,opacity] duration-150 ease-out hover:bg-ink-800 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50;
   }
   .btn-accent {
-    @apply inline-flex items-center justify-center gap-2 rounded-lg bg-brand px-5 py-2.5 text-sm font-semibold text-white shadow-paper transition duration-150 hover:bg-brand-700 active:translate-y-px disabled:cursor-not-allowed disabled:opacity-50;
+    @apply inline-flex items-center justify-center gap-2 rounded-lg bg-brand px-5 py-2.5 text-sm font-semibold text-white shadow-paper transition-[background-color,border-color,color,transform,opacity] duration-150 ease-out hover:bg-brand-700 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50;
   }
   .btn-ghost {
-    @apply inline-flex items-center justify-center gap-2 rounded-lg border border-line bg-white/60 px-5 py-2.5 text-sm font-semibold text-ink transition duration-150 hover:border-ink-300 hover:bg-white active:translate-y-px disabled:opacity-50;
+    @apply inline-flex items-center justify-center gap-2 rounded-lg border border-line bg-white/60 px-5 py-2.5 text-sm font-semibold text-ink transition-[background-color,border-color,color,transform,opacity] duration-150 ease-out hover:border-ink-300 hover:bg-white active:scale-[0.98] disabled:opacity-50;
   }
   .btn-secondary {
-    @apply inline-flex items-center justify-center gap-2 rounded-lg border border-line bg-white px-4 py-2 text-sm font-semibold text-ink-700 transition duration-150 hover:border-ink-300 hover:text-ink active:translate-y-px disabled:opacity-50;
+    @apply inline-flex items-center justify-center gap-2 rounded-lg border border-line bg-white px-4 py-2 text-sm font-semibold text-ink-700 transition-[background-color,border-color,color,transform,opacity] duration-150 ease-out hover:border-ink-300 hover:text-ink active:scale-[0.98] disabled:opacity-50;
   }
   .btn-danger {
-    @apply inline-flex items-center justify-center gap-2 rounded-lg bg-red-700 px-4 py-2 text-sm font-semibold text-white transition duration-150 hover:bg-red-800 active:translate-y-px disabled:opacity-50;
+    @apply inline-flex items-center justify-center gap-2 rounded-lg bg-rust px-4 py-2 text-sm font-semibold text-white transition-[background-color,border-color,color,transform,opacity] duration-150 ease-out hover:bg-rust-700 active:scale-[0.98] disabled:opacity-50;
   }
   .input {
-    @apply w-full rounded-lg border border-line bg-white px-3 py-2.5 text-sm text-ink placeholder:text-ink-400 transition duration-150 focus:border-brand focus:outline-none focus:ring-4 focus:ring-brand/15;
+    @apply w-full rounded-lg border border-line bg-white px-3 py-2.5 text-sm text-ink placeholder:text-ink-400 transition-[background-color,border-color,color,transform,opacity] duration-150 ease-out focus:border-brand focus:outline-none focus:ring-4 focus:ring-brand/15;
   }
   .label { @apply mb-1.5 block text-[13px] font-semibold text-ink-700; }
   .card { @apply rounded-xl border border-line bg-white p-6 shadow-paper; }
   .card-hover {
-    @apply transition-all duration-200 hover:-translate-y-0.5 hover:border-ink-300 hover:shadow-lift;
+    @apply relative transition-transform duration-200 ease-out hover:-translate-y-0.5;
   }
+  .card-hover::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    box-shadow: 0 1px 2px rgba(21, 23, 28, 0.05), 0 12px 32px -12px rgba(21, 23, 28, 0.22);
+    opacity: 0;
+    transition: opacity 200ms ease-out;
+    pointer-events: none;
+  }
+  .card-hover:hover::after { opacity: 1; }
   .eyebrow {
     @apply text-[11px] font-semibold uppercase tracking-[0.18em] text-brand;
   }
@@ -143,10 +191,13 @@ details > summary::-webkit-details-marker { display: none; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
+    animation-delay: 0s !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+  .wipe::after, .skeleton::after { display: none; }
+  .card-hover:hover, .btn-primary:active, .btn-accent:active, .btn-ghost:active, .btn-secondary:active, .btn-danger:active { transform: none; }
 }
 
 /* PDF print styles */

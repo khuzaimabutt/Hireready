@@ -42,6 +42,12 @@ const config: Config = {
           50: "#FBF3E2",
           700: "#8A5A0F",
         },
+        rust: {
+          DEFAULT: "#A63D2F",
+          50: "#F8ECE9",
+          200: "#E9C7C0",
+          700: "#862F23",
+        },
         soft: "#F6F3EC",
       },
       fontFamily: {
