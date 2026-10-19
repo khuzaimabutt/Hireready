@@ -121,7 +121,7 @@ function ProductShot() {
       </div>
 
       {/* ATS panel */}
-      <div className="float-up absolute -left-3 bottom-10 w-48 rounded-xl border border-line bg-white p-4 shadow-lift sm:-left-10" aria-hidden="true">
+      <div className="float-up absolute -left-3 -bottom-10 w-48 rounded-xl border border-line bg-white p-4 shadow-lift sm:-left-10" aria-hidden="true">
         <div className="flex items-center gap-3">
           <ScoreDial value={94} />
           <div>
