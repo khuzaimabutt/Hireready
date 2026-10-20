@@ -138,7 +138,7 @@ function ProductShot() {
       </div>
 
       {/* rewrite chip */}
-      <div className="pop-in absolute -right-2 -top-5 rounded-lg bg-ink px-3.5 py-2.5 text-[11px] text-white shadow-lift sm:-right-6" style={D(2250)} aria-hidden="true">
+      <div className="pop-in absolute -right-2 -top-5 hidden rounded-lg bg-ink px-3.5 py-2.5 text-[11px] text-white shadow-lift sm:block sm:-right-6" style={D(2250)} aria-hidden="true">
         <div className="font-semibold text-brand-100">Bullet rewritten</div>
         <div className="text-white/75">&ldquo;Worked on APIs&rdquo; to measurable result</div>
       </div>
