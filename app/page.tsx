@@ -122,7 +122,7 @@ function ProductShot() {
       </div>
 
       {/* ATS panel */}
-      <div className="pop-in absolute -left-3 -bottom-10 w-48 rounded-xl border border-line bg-white p-4 shadow-lift sm:-left-10" style={D(2900)} aria-hidden="true">
+      <div className="pop-in absolute -right-3 -bottom-8 hidden w-48 rounded-xl border border-line bg-white p-4 shadow-lift sm:block sm:-right-8" style={D(2900)} aria-hidden="true">
         <div className="flex items-center gap-3">
           <AtsScoreRing score={94} size={48} stroke={5} caption={false} delay={3000} />
           <div>
